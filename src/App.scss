@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    }
+    html{
+    font-family: "微软雅黑";
+    color: rgb(32,35,42);
+    }
+    html,body,#root{
+        height: 100%;
+    }
+    a{
+    text-decoration:none;
+    }
+    a:active{
+        color: rgb(233,73,73);
+    }
+    li{
+    list-style: none;
+    }
