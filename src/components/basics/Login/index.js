@@ -1,11 +1,14 @@
 import React, { Component, Suspense, lazy } from 'react'
 import './index.scss'
 import { Form, Icon, Input, Button, message } from 'antd';
-
-// import WebGLbg from '../WebGLbg'
+import Timer from '../../../assets/lib/timer.js'
 const WebGLbg = lazy(() => import('../WebGLbg'));
 
 class Login extends Component {
+   constructor(props) {
+      super(props)
+      this.Timer = null
+   }
    handleSubmit(e) {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
@@ -20,13 +23,22 @@ class Login extends Component {
          }
       });
    };
-
+   componentDidMount() {
+      window.innerWidth >= 1366 && (this.Timer = new Timer({ el: '#timer' }))
+   }
+   componentWillUnmount() {
+      this.Timer !== null && this.Timer.destroyTime()
+   }
    render() {
       const { getFieldDecorator } = this.props.form;
       return (
          <div className="login-wrap">
             <Suspense >
                <WebGLbg></WebGLbg>
+               {
+                  window.innerWidth >= 1366 ?
+                     <div id="timer" style={{ width: window.innerWidth / 4, height: window.innerHeight, position: 'fixed', top: 0, right: '100px', zIndex: 11, fontWeight: '900' }}></div> : null
+               }
             </Suspense>
             <div className="login-form-wrap">
                <h2 align="center">Tadpole React Admin</h2>
