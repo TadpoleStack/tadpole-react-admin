@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { perlin } from '../../../assets/lib/perlin.js'
+import { perlin } from 'assets/lib/perlin.js'
 import * as THREE from 'three'
 window.THREE = THREE
 
