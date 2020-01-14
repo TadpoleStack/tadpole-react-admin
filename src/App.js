@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import {
    HashRouter as Router,
    Switch,
@@ -8,23 +8,22 @@ import {
 import './App.scss';
 import './assets/lib/animate.css'
 import 'antd/dist/antd.css';
-import Login from 'components/basics/Login'
-import Loading from 'components/basics/Loading'
-const NotFound = lazy(() => import('components/basics/NotFound'));
-const Home = lazy(() => import('components/business/Home'));
+import loadable from 'utils/loadable'
+
+const Login = loadable(() => import('components/basics/Login'))
+const NotFound = loadable(() => import('components/basics/NotFound'))
+const Home = loadable(() => import('components/business/Home'))
 
 function App() {
    return (
       <Router>
-         <Suspense fallback={<div><Loading/></div>}>
-            <Switch>
-               <Route exact path="/" render={() => <Redirect to="/login" push />}></Route>
-               <Route exact path="/login" component={Login}></Route>
-               <Route path="/home" component={Home}></Route>
-               <Route path="/404" component={NotFound}></Route>
-               <Route render={() => <Redirect to="/404" />} />
-            </Switch>
-         </Suspense>
+         <Switch>
+            <Route exact path="/" render={() => <Redirect to="/login" push />}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route path="/home" component={Home}></Route>
+            <Route path="/404" component={NotFound}></Route>
+            <Route render={() => <Redirect to="/404" />} />
+         </Switch>
       </Router>
    );
 }
