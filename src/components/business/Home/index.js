@@ -3,6 +3,7 @@ import {
    Switch,
    Route,
 } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import loadable from 'utils/loadable'
 
 const Header = loadable(() => import('components/basics/Header'))
@@ -26,16 +27,17 @@ class Home extends Component {
             <Header height={this.state.headerHeight} />
             <div style={{ width: '100%', height: `calc(100% - ${this.state.headerHeight})`, display: 'flex' }}>
                <Sidebar width={this.state.sidebarWidth} />
-               <div style={{ height: '100%', flex: 1 }}>
-                  <Switch>
-                     <Route exact path="/home" component={Start}></Route>
-                     <Route exact path="/home/start" render={() => <div>homestart</div>}></Route>
-                     <Route component={NotFound}></Route>
-                  </Switch>
+               <div style={{ height: '100%', flex: 1, overflowY: 'hidden' }}>
+                  <CSSTransition timeout={500}>
+                     <Switch>
+                        <Route exact path="/home" component={Start}></Route>
+                        <Route exact path="/home/start" render={() => <div>homestart</div>}></Route>
+                        <Route component={NotFound}></Route>
+                     </Switch>
+                  </CSSTransition>
                </div>
-
             </div>
-         </div>
+         </div >
       )
    }
 }

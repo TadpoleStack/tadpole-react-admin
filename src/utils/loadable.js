@@ -5,6 +5,7 @@ import Loading from 'components/basics/Loading'
 export default (loader, loading = Loading) => {
    return Loadable({
       loader,
-      loading
+      loading,
+      delay: 300,
    });
 }
