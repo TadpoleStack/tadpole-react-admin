@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
+import { HeaderWrap } from './style'
 export default class Header extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         height:this.props.height||'60px'
+         height: this.props.height || '60px'
       }
    }
 
    render() {
-      return (<div style={{width: '100%', height: this.state.height, backgroundColor: '#00d0b1'}}>header</div>)
+      return (<HeaderWrap height={this.state.height}>header</HeaderWrap>)
    }
 }

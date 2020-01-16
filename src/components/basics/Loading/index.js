@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { Spin } from "antd";
+import { ErrorLoading, PastDelayLoading } from './style'
 
 export default class Loading extends Component {
    render() {
       if (this.props.error) {
-         return (<div style={{ height: '100%', width: '100%', position: 'fixed', top: 0, left: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(255, 255, 255, .4)' }}>
-            页面走丢了！
-      </div >)
+         return (
+            <ErrorLoading>
+               页面走丢了！
+            </ErrorLoading>)
       } else if (this.props.pastDelay) {
          return (
-            <div style={{ height: '100%', width: '100%', position: 'fixed', top: 0, left: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(255, 255, 255, .4)' }}>
+            <PastDelayLoading>
                <Spin />
-            </div >
-         )
+            </PastDelayLoading>)
       } else {
          return null
       }

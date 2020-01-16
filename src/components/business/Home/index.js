@@ -31,7 +31,7 @@ class Home extends Component {
                   <CSSTransition timeout={500}>
                      <Switch>
                         <Route exact path="/home" component={Start}></Route>
-                        <Route exact path="/home/start" render={() => <div>homestart</div>}></Route>
+                        <Route exact path="/home/overview" render={() => <div>homestart</div>}></Route>
                         <Route component={NotFound}></Route>
                      </Switch>
                   </CSSTransition>

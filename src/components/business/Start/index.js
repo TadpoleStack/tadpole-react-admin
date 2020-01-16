@@ -9,12 +9,13 @@ export default class Start extends Component {
       }
    }
    componentDidMount() {
-      this.state.Typed = new Typed('#typed-box', {
+      let typed = new Typed('#typed-box', {
          strings: ['npm install^1000<br/> `installing components...` ^1000 <br/> `Fetching from source...`'],
          typeSpeed: 40,
          backSpeed: 0,
          loop: true
       });
+      this.setState({ Typed: typed })
    }
    render() {
       return (
