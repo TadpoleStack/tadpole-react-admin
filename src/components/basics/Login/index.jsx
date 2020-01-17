@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import './index.scss'
 import { Form, Icon, Input, Button, message } from 'antd';
-import Timer from 'assets/lib/timer.js'
 import loadable from 'utils/loadable'
 const WebGLbg = loadable(() => import('../WebGLbg'))
+const Timer = loadable(() => import('../Timer'))
 
 class Login extends Component {
    constructor(props) {
       super(props)
-      this.Timer = null
+      this.state = {
+         Timer: null
+      }
    }
 
    handleSubmit(e) {
@@ -26,34 +28,13 @@ class Login extends Component {
       });
    };
 
-   componentDidMount() {
-      window.innerWidth >= 1366 && (this.Timer = new Timer({ el: '#timer' }))
-   }
-
-   componentWillUnmount() {
-      this.Timer !== null && this.Timer.destroyTime()
-   }
-
    render() {
       const { getFieldDecorator } = this.props.form;
       return (
          <div className="login-wrap">
-            {/* <Suspense> */}
             <WebGLbg></WebGLbg>
-            {
-               window.innerWidth >= 1366 ?
-                  <div id="timer" style={{
-                     width: window.innerWidth / 4,
-                     height: window.innerHeight,
-                     position: 'fixed',
-                     top: 0,
-                     right: '100px',
-                     zIndex: 11,
-                     fontWeight: '900'
-                  }}></div> : null
-            }
-            {/* </Suspense> */}
-            <div className="login-form-wrap">
+            <Timer width={window.innerWidth / 3} height={window.innerHeight}></Timer>
+            <div className="login-form-wrap" style={{ width: window.innerWidth < 992 ? '280px' : '360px' }}>
                <h2 align="center">Tadpole React Admin</h2>
                <Form onSubmit={this.handleSubmit.bind(this)}>
                   <Form.Item>
@@ -81,7 +62,7 @@ class Login extends Component {
                   </Form.Item>
                </Form>
             </div>
-         </div>
+         </div >
       )
    }
 }

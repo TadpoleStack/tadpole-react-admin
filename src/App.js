@@ -6,7 +6,7 @@ import {
    Redirect
 } from 'react-router-dom'
 import './App.scss';
-import './assets/lib/animate.css'
+// import './assets/lib/animate.css'
 import loadable from 'utils/loadable'
 
 const Login = loadable(() => import('components/basics/Login'))
