@@ -6,7 +6,7 @@ import {
    Redirect
 } from 'react-router-dom'
 import './App.scss';
-// import './assets/lib/animate.css'
+import 'animate.css'
 import loadable from 'utils/loadable'
 
 const Login = loadable(() => import('components/basics/Login'))
@@ -20,7 +20,7 @@ function App() {
             <Route exact path="/" render={() => <Redirect to="/login" push />}></Route>
             <Route exact path="/login" component={Login}></Route>
             <Route path="/home" component={Home}></Route>
-            <Route path="/404" component={NotFound}></Route>
+            <Route exact path="/404" component={NotFound}></Route>
             <Route render={() => <Redirect to="/404" />} />
          </Switch>
       </Router>

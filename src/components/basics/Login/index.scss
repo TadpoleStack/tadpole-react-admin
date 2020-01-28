@@ -4,8 +4,14 @@
     background: rgb(240,240,240);
     position: absolute;
     z-index: 10;
+    //阻止默认选中文字
+   -webkit-user-select: none;  
+   -moz-user-select:none;  
+   -o-user-select:none;  
+   -ms-user-select:none;
     .login-form-wrap{
       //   width: 360px;
+        cursor: pointer;
         height: 260px;
         position: fixed;
         z-index: 100;

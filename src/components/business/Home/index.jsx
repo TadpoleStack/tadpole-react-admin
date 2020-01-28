@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import {
+   HashRouter as Router,
    Switch,
    Route,
+   Redirect
 } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
+// import { CSSTransition } from 'react-transition-group'
 import loadable from 'utils/loadable'
 
 const Header = loadable(() => import('components/basics/Header'))
 const Sidebar = loadable(() => import('components/basics/Sidebar'))
 const NotFound = loadable(() => import('components/basics/NotFound'))
 const Start = loadable(() => import('components/business/Start'))
+const TypedPlugin = loadable(() => import('components/business/TypedPlugin'))
 
 class Home extends Component {
    constructor(props) {
@@ -28,13 +31,17 @@ class Home extends Component {
             <div style={{ width: '100%', height: `calc(100% - ${this.state.headerHeight})`, display: 'flex' }}>
                <Sidebar width={this.state.sidebarWidth} />
                <div style={{ height: '100%', flex: 1, overflowY: 'hidden' }}>
-                  <CSSTransition timeout={500}>
+                  {/* <CSSTransition timeout={500}> */}
+                  <Router>
                      <Switch>
                         <Route exact path="/home" component={Start}></Route>
-                        <Route exact path="/home/overview" render={() => <div>homestart</div>}></Route>
-                        <Route component={NotFound}></Route>
+                        <Route exact path="/home/ui" render={() => <div>ui</div>}></Route>
+                        <Route exact path="/home/typedplugin" component={TypedPlugin}></Route>
+                        <Route exact path="/home/404" component={NotFound}></Route>
+                        <Route render={() => <Redirect to="/home/404" />} />
                      </Switch>
-                  </CSSTransition>
+                  </Router>
+                  {/* </CSSTransition> */}
                </div>
             </div>
          </div >

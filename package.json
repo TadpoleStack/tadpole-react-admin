@@ -10,6 +10,7 @@
       "@testing-library/user-event": "^7.1.2",
       "@typescript-eslint/eslint-plugin": "^2.8.0",
       "@typescript-eslint/parser": "^2.8.0",
+      "animate.css": "^3.7.2",
       "antd": "^3.26.6",
       "babel-eslint": "10.0.3",
       "babel-jest": "^24.9.0",

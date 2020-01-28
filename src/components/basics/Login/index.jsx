@@ -27,12 +27,16 @@ class Login extends Component {
          }
       });
    };
+   //阻止默认
+   prevetDefault(e) {
+      e.preventDefault()
+   }
 
    render() {
       const { getFieldDecorator } = this.props.form;
       return (
-         <div className="login-wrap">
-            <WebGLbg></WebGLbg>
+         <div className="login-wrap" onContextMenu={this.prevetDefault}>
+            <WebGLbg ></WebGLbg>
             <Timer width={window.innerWidth / 3} height={window.innerHeight}></Timer>
             <div className="login-form-wrap" style={{ width: window.innerWidth < 992 ? '280px' : '360px' }}>
                <h2 align="center">Tadpole React Admin</h2>
