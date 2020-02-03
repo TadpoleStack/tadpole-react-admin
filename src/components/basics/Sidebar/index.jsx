@@ -48,7 +48,7 @@ class Sidebar extends Component {
                      </span>
                   }
                >
-                  <Menu.Item key="/home/ui">UI 一</Menu.Item>
+                  <Menu.Item key="/home/iconpage">小图标</Menu.Item>
                </SubMenu>
                <SubMenu
                   key="charts"
