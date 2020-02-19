@@ -12,7 +12,7 @@ export default class Loading extends Component {
       } else if (this.props.pastDelay) {
          return (
             <PastDelayLoading>
-               <Spin />
+               <Spin size={"large"} />
             </PastDelayLoading>)
       } else {
          return null

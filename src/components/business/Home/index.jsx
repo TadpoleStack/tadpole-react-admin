@@ -32,19 +32,19 @@ class Home extends Component {
             <div style={{ width: '100%', height: `calc(100% - ${this.state.headerHeight})`, display: 'flex' }}>
                <Sidebar width={this.state.sidebarWidth} />
                <div style={{ height: '100%', flex: 1, overflowY: 'hidden' }}>
-                  <TransitionGroup>
-                     <CSSTransition classNames="fade" key={this.props.location.pathname} timeout={500}>
-                        <Router>
-                           <Switch>
-                              <Route exact path="/home" component={Start}></Route>
-                              <Route exact path="/home/iconpage" component={IconPage}></Route>
-                              <Route exact path="/home/typedplugin" component={TypedPlugin}></Route>
-                              <Route exact path="/home/404" component={NotFound}></Route>
-                              <Route render={() => <Redirect to="/home/404" />} />
-                           </Switch>
-                        </Router>
-                     </CSSTransition>
-                  </TransitionGroup>
+                  {/* <TransitionGroup>
+                     <CSSTransition classNames="fade" key={this.props.location.pathname} timeout={500}> */}
+                  <Router>
+                     <Switch>
+                        <Route exact path="/home" component={Start}></Route>
+                        <Route exact path="/home/iconpage" component={IconPage}></Route>
+                        <Route exact path="/home/typedplugin" component={TypedPlugin}></Route>
+                        <Route exact path="/home/404" component={NotFound}></Route>
+                        <Route render={() => <Redirect to="/home/404" />} />
+                     </Switch>
+                  </Router>
+                  {/* </CSSTransition>
+                  </TransitionGroup> */}
                </div>
             </div>
          </div >
