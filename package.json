@@ -11,7 +11,7 @@
       "@typescript-eslint/eslint-plugin": "^2.8.0",
       "@typescript-eslint/parser": "^2.8.0",
       "animate.css": "^3.7.2",
-      "antd": "^3.26.6",
+      "antd": "^4.0.3",
       "babel-eslint": "10.0.3",
       "babel-jest": "^24.9.0",
       "babel-loader": "8.0.6",

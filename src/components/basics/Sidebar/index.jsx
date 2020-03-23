@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 import { SidebarWrap } from './style'
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
+import { HomeOutlined, AppstoreOutlined, AreaChartOutlined, EditOutlined, TableOutlined, FormOutlined, HighlightOutlined, QuestionOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
@@ -36,14 +37,14 @@ class Sidebar extends Component {
                <Menu.Item
                   key="/home"
                >
-                  <Icon type="home" />
+                  <HomeOutlined />
                   <span>首页</span>
                </Menu.Item>
                <SubMenu
                   key="ui"
                   title={
                      <span>
-                        <Icon type="appstore" />
+                        <AppstoreOutlined />
                         <span>UI</span>
                      </span>
                   }
@@ -54,7 +55,7 @@ class Sidebar extends Component {
                   key="charts"
                   title={
                      <span>
-                        <Icon type="area-chart" />
+                        <AreaChartOutlined />
                         <span>charts</span>
                      </span>
                   }
@@ -67,7 +68,7 @@ class Sidebar extends Component {
                   key="richtext"
                   title={
                      <span>
-                        <Icon type="area-chart" />
+                        <EditOutlined />
                         <span>富文本</span>
                      </span>
                   }
@@ -77,19 +78,19 @@ class Sidebar extends Component {
                   <Menu.Item key="/home/jsonedit">JSON编辑器</Menu.Item>
                </SubMenu>
                <Menu.Item key="/home/table">
-                  <Icon type="table" />
+                  <TableOutlined />
                   <span>Table</span>
                </Menu.Item>
                <Menu.Item key="/home/form">
-                  <Icon type="form" />
+                  <FormOutlined />
                   <span>Form</span>
                </Menu.Item>
                <Menu.Item key="/home/typedplugin">
-                  <Icon type="edit" />
+                  <HighlightOutlined />
                   <span>TypedPlugin</span>
                </Menu.Item>
                <Menu.Item key="/404">
-                  <Icon type="question-circle" />
+                  <QuestionOutlined />
                   <span>404</span>
                </Menu.Item>
             </Menu>

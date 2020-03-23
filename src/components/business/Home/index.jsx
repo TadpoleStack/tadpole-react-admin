@@ -5,7 +5,7 @@ import {
    Route,
    Redirect
 } from 'react-router-dom'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+// import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import loadable from 'utils/loadable'
 import './index.scss'
 const Header = loadable(() => import('components/basics/Header'))
