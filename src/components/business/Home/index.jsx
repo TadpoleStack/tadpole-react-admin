@@ -30,9 +30,18 @@ class Home extends Component {
                         width: '100%',
                         height: `calc(100% - ${this.state.headerHeight})`,
                         display: 'flex',
+                        position: 'relative',
                     }}
                 >
-                    <Sidebar width={this.state.sidebarWidth} />
+                    <Sidebar
+                        width={
+                            Number(
+                                this.state.windowWidth.replace(/(px)/g, ''),
+                            ) > 1024
+                                ? this.state.sidebarWidth
+                                : '100%'
+                        }
+                    />
                     <div
                         style={{ height: '100%', flex: 1, overflowY: 'hidden' }}
                     >
