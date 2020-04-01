@@ -17,6 +17,7 @@ class Home extends Component {
             windowWidth: window.innerWidth + 'px',
             headerHeight: '60px',
             sidebarWidth: '260px',
+            isPC: window.innerWidth > 1024,
         }
     }
 
@@ -34,12 +35,9 @@ class Home extends Component {
                     }}
                 >
                     <Sidebar
+                        isPC={this.state.isPC}
                         width={
-                            Number(
-                                this.state.windowWidth.replace(/(px)/g, ''),
-                            ) > 1024
-                                ? this.state.sidebarWidth
-                                : '100%'
+                            this.state.isPC ? this.state.sidebarWidth : '100%'
                         }
                     />
                     <div

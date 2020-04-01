@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { SidebarWrap } from './style'
-import { Menu } from 'antd'
+import { Menu, message } from 'antd'
 import {
     HomeOutlined,
     AppstoreOutlined,
@@ -12,7 +12,7 @@ import {
     HighlightOutlined,
     QuestionOutlined,
 } from '@ant-design/icons'
-
+import EventEmitter from 'utils/EventEmitter.js'
 const { SubMenu } = Menu
 
 class Sidebar extends Component {
@@ -22,6 +22,7 @@ class Sidebar extends Component {
             width: this.props.width || '260px',
             theme: 'dark',
             current: '/home',
+            sidebarState: false,
         }
     }
     handleClick = e => {
@@ -29,11 +30,35 @@ class Sidebar extends Component {
         this.props.history.push(e.key)
         this.setState({
             current: e.key,
+            sidebarState: false,
+        })
+    }
+    EventEmitterListener() {
+        this.changeSidebarStateListener = EventEmitter.on(
+            'changeSidebarState',
+            () => {
+                this.setState(state => {
+                    return { sidebarState: !state.sidebarState }
+                })
+                message.info(`${this.state.sidebarState}`)
+            },
+        )
+    }
+    componentDidMount() {
+        this.EventEmitterListener()
+    }
+    componentWillUnmount() {
+        EventEmitter.off('changeSidebarState', () => {
+            message.info(`off`)
         })
     }
     render() {
         return (
-            <SidebarWrap width={this.state.width}>
+            <SidebarWrap
+                width={this.state.width}
+                isPC={this.props.isPC}
+                sidebarState={this.state.sidebarState}
+            >
                 <Menu
                     theme={this.state.theme}
                     onClick={this.handleClick}
@@ -41,7 +66,9 @@ class Sidebar extends Component {
                     defaultOpenKeys={['/home']}
                     selectedKeys={[this.state.current]}
                     mode="inline"
-                    inlineCollapsed={false}
+                    inlineCollapsed={
+                        this.props.isPC ? !this.state.sidebarState : false
+                    }
                 >
                     <Menu.Item key="/home">
                         <HomeOutlined />
@@ -101,6 +128,10 @@ class Sidebar extends Component {
                     <Menu.Item key="/404">
                         <QuestionOutlined />
                         <span>404</span>
+                    </Menu.Item>
+                    <Menu.Item key="/login">
+                        <QuestionOutlined />
+                        <span>返回登录</span>
                     </Menu.Item>
                 </Menu>
             </SidebarWrap>
