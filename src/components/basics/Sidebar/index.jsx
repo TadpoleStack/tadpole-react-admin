@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { SidebarWrap } from './style'
-import { Menu, message } from 'antd'
+import { Menu } from 'antd'
 import {
     HomeOutlined,
     AppstoreOutlined,
@@ -26,7 +26,6 @@ class Sidebar extends Component {
         }
     }
     handleClick = e => {
-        console.log('click ', e)
         this.props.history.push(e.key)
         this.setState({
             current: e.key,
@@ -34,23 +33,17 @@ class Sidebar extends Component {
         })
     }
     EventEmitterListener() {
-        this.changeSidebarStateListener = EventEmitter.on(
-            'changeSidebarState',
-            () => {
-                this.setState(state => {
-                    return { sidebarState: !state.sidebarState }
-                })
-                message.info(`${this.state.sidebarState}`)
-            },
-        )
+        EventEmitter.on('changeSidebarState', () => {
+            this.setState(state => {
+                return { sidebarState: !state.sidebarState }
+            })
+        })
     }
     componentDidMount() {
         this.EventEmitterListener()
     }
     componentWillUnmount() {
-        EventEmitter.off('changeSidebarState', () => {
-            message.info(`off`)
-        })
+        EventEmitter.removeAllListeners('changeSidebarState')
     }
     render() {
         return (
