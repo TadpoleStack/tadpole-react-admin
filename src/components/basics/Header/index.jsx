@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { HeaderWrap } from './style'
 import { Button } from 'antd'
 import EventEmitter from 'utils/EventEmitter.js'
+import { MenuFoldOutlined } from '@ant-design/icons'
 export default class Header extends Component {
     constructor(props) {
         super(props)
@@ -15,12 +16,21 @@ export default class Header extends Component {
     render() {
         return (
             <HeaderWrap height={this.state.height}>
-                <Button
-                    type="primary"
-                    onClick={this.changeSidebarState.bind(this)}
+                <div
+                    style={{
+                        float: 'left',
+                        width: '80px',
+                        height: this.state.height,
+                        textAlign: 'center',
+                        lineHeight: this.state.height,
+                    }}
                 >
-                    Primary
-                </Button>
+                    <Button
+                        ghost={true}
+                        icon={<MenuFoldOutlined />}
+                        onClick={this.changeSidebarState.bind(this)}
+                    ></Button>
+                </div>
                 header
             </HeaderWrap>
         )

@@ -1,3 +1,6 @@
+/**
+ * base64加密解密
+ */
 const base64 = {
     encode(str) {
         return btoa(
