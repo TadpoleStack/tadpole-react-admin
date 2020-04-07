@@ -19,6 +19,7 @@ class Sidebar extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isPC: this.props.isPC === undefined ? true : this.props.isPC,
             width: this.props.width || '260px',
             theme: 'dark',
             current: '/home',
@@ -29,8 +30,10 @@ class Sidebar extends Component {
         this.props.history.push(e.key)
         this.setState({
             current: e.key,
-            sidebarState: false,
         })
+        if (!this.props.isPC) {
+            this.setState({ sidebarState: false })
+        }
     }
     EventEmitterListener() {
         EventEmitter.on('changeSidebarState', () => {
@@ -49,7 +52,7 @@ class Sidebar extends Component {
         return (
             <SidebarWrap
                 width={this.state.width}
-                isPC={this.props.isPC}
+                isPC={this.state.isPC}
                 sidebarState={this.state.sidebarState}
             >
                 <Menu

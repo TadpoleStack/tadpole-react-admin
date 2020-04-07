@@ -9,6 +9,7 @@ export default class Header extends Component {
         super(props)
         this.state = {
             height: this.props.height || '60px',
+            isPC: this.props.isPC,
         }
     }
     changeSidebarState() {
@@ -37,18 +38,19 @@ export default class Header extends Component {
                 </div>
                 header
                 <div
-                    class="avatar-wrap"
+                    className="avatar-wrap"
                     style={{
                         float: 'right',
                         height: this.state.height,
+                        width: this.state.height,
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}
                 >
                     <Avatar
-                        size={64}
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        size={this.state.isPC ? 64 : 48}
+                        src="https://s.gravatar.com/avatar/4770ccdd197bff1ab146a978c26cca6a?s=128&r=X"
                     />
                 </div>
             </HeaderWrap>

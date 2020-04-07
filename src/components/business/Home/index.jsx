@@ -15,7 +15,7 @@ class Home extends Component {
         super(props)
         this.state = {
             windowWidth: window.innerWidth + 'px',
-            headerHeight: '80px',
+            headerHeight: window.innerWidth > 1024 ? '80px' : '60px',
             sidebarWidth: '260px',
             isPC: window.innerWidth > 1024,
         }
@@ -25,7 +25,10 @@ class Home extends Component {
     render() {
         return (
             <div style={{ width: '100%', height: '100%' }}>
-                <Header height={this.state.headerHeight} />
+                <Header
+                    isPC={this.state.isPC}
+                    height={this.state.headerHeight}
+                />
                 <div
                     style={{
                         width: '100%',
