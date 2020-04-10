@@ -23,7 +23,6 @@ export default class Header extends Component {
             >
                 <div
                     style={{
-                        float: 'left',
                         width: '80px',
                         height: this.state.height,
                         textAlign: 'center',
@@ -36,11 +35,10 @@ export default class Header extends Component {
                         onClick={this.changeSidebarState.bind(this)}
                     ></Button>
                 </div>
-                header
+                <div className="header-center">Tadpole-react-admin</div>
                 <div
                     className="avatar-wrap"
                     style={{
-                        float: 'right',
                         height: this.state.height,
                         width: this.state.height,
                         display: 'flex',
