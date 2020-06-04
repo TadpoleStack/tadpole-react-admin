@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import './App.scss';
 import 'animate.css'
+import 'antd/dist/antd.css';
 import loadable from 'utils/loadable'
 
 const Login = loadable(() => import('components/basics/Login'))
@@ -28,4 +29,3 @@ function App() {
 }
 
 export default App;
-
