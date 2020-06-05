@@ -35,7 +35,7 @@ class Login extends Component {
             <div
                className="login-form-wrap"
                style={{
-                  width: window.innerWidth <= 768 ? '280px' : '360px',
+                  width: window.innerWidth < 768 ? '280px' : '360px',
                }}
             >
                <h2 align="center">Tadpole React Admin</h2>

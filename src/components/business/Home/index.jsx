@@ -15,9 +15,9 @@ class Home extends Component {
       super(props)
       this.state = {
          windowWidth: window.innerWidth + 'px',
-         headerHeight: window.innerWidth > 768 ? '80px' : '60px',
+         headerHeight: window.innerWidth >= 768 ? '80px' : '60px',
          sidebarWidth: '260px',
-         isPC: window.innerWidth > 768,
+         isPC: window.innerWidth >= 768,
       }
    }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { HeaderWrap } from './style'
 import { Button, Avatar } from 'antd'
-import EventEmitter from 'utils/EventEmitter.js'
 import { MenuFoldOutlined } from '@ant-design/icons'
 import './index.scss'
 export default class Header extends Component {
@@ -13,7 +12,7 @@ export default class Header extends Component {
         }
     }
     changeSidebarState() {
-        EventEmitter.emit('changeSidebarState')
+      React.$eventEmitter.emit('changeSidebarState')
     }
     render() {
         return (

@@ -12,7 +12,6 @@ import {
     HighlightOutlined,
     QuestionOutlined,
 } from '@ant-design/icons'
-import EventEmitter from 'utils/EventEmitter.js'
 const { SubMenu } = Menu
 
 class Sidebar extends Component {
@@ -36,7 +35,7 @@ class Sidebar extends Component {
         }
     }
     EventEmitterListener() {
-        EventEmitter.on('changeSidebarState', () => {
+      React.$eventEmitter.on('changeSidebarState', () => {
             this.setState(state => {
                 return { sidebarState: !state.sidebarState }
             })
@@ -46,7 +45,7 @@ class Sidebar extends Component {
         this.EventEmitterListener()
     }
     componentWillUnmount() {
-        EventEmitter.removeAllListeners('changeSidebarState')
+      React.$eventEmitter.removeAllListeners('changeSidebarState')
     }
     render() {
         return (
