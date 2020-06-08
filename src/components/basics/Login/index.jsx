@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import './index.scss'
 import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-const WebGLbg = React.$loadable(() => import('../WebGLbg'))
-const Timer = React.$loadable(() => import('../Timer'))
+import loadable from 'utils/loadable'
+const WebGLbg = loadable(() => import('../WebGLbg'))
+const Timer = loadable(() => import('../Timer'))
 
 class Login extends Component {
    constructor(props) {
