@@ -4,8 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import addGlobalMethods from './utils/index'
-addGlobalMethods(React)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import loadable from 'utils/loadable'
 import './index.scss'
-const Header = loadable(() => import('components/basics/Header'))
-const Sidebar = loadable(() => import('components/basics/Sidebar'))
-const NotFound = loadable(() => import('components/basics/NotFound'))
-const Start = loadable(() => import('components/business/Start'))
-const TypedPlugin = loadable(() => import('components/business/TypedPlugin'))
-const IconPage = loadable(() => import('components/business/UI/IconPage'))
+const Header = React.$loadable(() => import('components/basics/Header'))
+const Sidebar = React.$loadable(() => import('components/basics/Sidebar'))
+const NotFound = React.$loadable(() => import('components/basics/NotFound'))
+const Start = React.$loadable(() => import('components/business/Start'))
+const TypedPlugin = React.$loadable(() => import('components/business/TypedPlugin'))
+const IconPage = React.$loadable(() => import('components/business/UI/IconPage'))
 
 class Home extends Component {
    constructor(props) {
@@ -21,7 +20,6 @@ class Home extends Component {
       }
    }
 
-   componentWillMount() { }
    render() {
       return (
          <div style={{ width: '100%', height: '100%' }}>

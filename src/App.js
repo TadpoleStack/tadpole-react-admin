@@ -8,11 +8,12 @@ import {
 import './App.scss';
 import 'animate.css'
 import 'antd/dist/antd.css';
-import loadable from 'utils/loadable'
+import addGlobalMethods from './utils/index'
+addGlobalMethods(React)
 
-const Login = loadable(() => import('components/basics/Login'))
-const NotFound = loadable(() => import('components/basics/NotFound'))
-const Home = loadable(() => import('components/business/Home'))
+const Login = React.$loadable(() => import('components/basics/Login'))
+const NotFound = React.$loadable(() => import('components/basics/NotFound'))
+const Home = React.$loadable(() => import('components/business/Home'))
 
 function App() {
    return (
