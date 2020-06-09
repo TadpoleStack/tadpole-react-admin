@@ -11,9 +11,9 @@ import 'antd/dist/antd.css';
 import addGlobalMethods from './utils/index'
 addGlobalMethods(React)
 
-const Login = React.$loadable(() => import('components/basics/Login'))
-const NotFound = React.$loadable(() => import('components/basics/NotFound'))
-const Home = React.$loadable(() => import('components/business/Home'))
+const Login = React.$loadable(() => import('@src/components/basics/Login'))
+const NotFound = React.$loadable(() => import('@src/components/basics/NotFound'))
+const Home = React.$loadable(() => import('@src/components/business/Home'))
 
 function App() {
    return (

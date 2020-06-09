@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
-const Header = React.$loadable(() => import('components/basics/Header'))
-const Sidebar = React.$loadable(() => import('components/basics/Sidebar'))
-const NotFound = React.$loadable(() => import('components/basics/NotFound'))
-const Start = React.$loadable(() => import('components/business/Start'))
-const TypedPlugin = React.$loadable(() => import('components/business/TypedPlugin'))
-const IconPage = React.$loadable(() => import('components/business/UI/IconPage'))
+const Header = React.$loadable(() => import('@src/components/basics/Header'))
+const Sidebar = React.$loadable(() => import('@src/components/basics/Sidebar'))
+const NotFound = React.$loadable(() => import('@src/components/basics/NotFound'))
+const Start = React.$loadable(() => import('@src/components/business/Start'))
+const TypedPlugin = React.$loadable(() => import('@src/components/business/TypedPlugin'))
+const IconPage = React.$loadable(() => import('@src/components/business/UI/IconPage'))
 
 class Home extends Component {
    constructor(props) {

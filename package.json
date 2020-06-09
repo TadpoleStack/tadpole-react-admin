@@ -48,5 +48,8 @@
       "last 1 safari version",
       "ie 11"
     ]
+  },
+  "devDependencies": {
+    "craco-alias": "^2.1.1"
   }
 }
