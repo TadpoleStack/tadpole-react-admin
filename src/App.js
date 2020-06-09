@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom'
 import './App.scss';
 import 'animate.css'
-import 'antd/dist/antd.css';
 import addGlobalMethods from './utils/index'
 addGlobalMethods(React)
 
