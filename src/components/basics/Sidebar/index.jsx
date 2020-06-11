@@ -21,7 +21,7 @@ class Sidebar extends Component {
             isPC: this.props.isPC === undefined ? true : this.props.isPC,
             width: this.props.width || '260px',
             theme: 'dark',
-            current: '/home',
+            current: '/admin',
             sidebarState: false,
         }
     }
@@ -58,14 +58,14 @@ class Sidebar extends Component {
                     theme={this.state.theme}
                     onClick={this.handleClick}
                     style={{ minHeight: '100%' }}
-                    defaultOpenKeys={['/home']}
+                    defaultOpenKeys={['/admin']}
                     selectedKeys={[this.state.current]}
                     mode="inline"
                     inlineCollapsed={
                         this.props.isPC ? !this.state.sidebarState : false
                     }
                 >
-                    <Menu.Item key="/home">
+                    <Menu.Item key="/admin">
                         <HomeOutlined />
                         <span>首页</span>
                     </Menu.Item>
@@ -78,7 +78,7 @@ class Sidebar extends Component {
                             </span>
                         }
                     >
-                        <Menu.Item key="/home/iconpage">小图标</Menu.Item>
+                        <Menu.Item key="/admin/iconpage">小图标</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="charts"
@@ -89,9 +89,9 @@ class Sidebar extends Component {
                             </span>
                         }
                     >
-                        <Menu.Item key="/home/echarts">Echarts</Menu.Item>
-                        <Menu.Item key="/home/highcharts">HighCharts</Menu.Item>
-                        <Menu.Item key="/home/recharts">ReCharts</Menu.Item>
+                        <Menu.Item key="/admin/echarts">Echarts</Menu.Item>
+                        <Menu.Item key="/admin/highcharts">HighCharts</Menu.Item>
+                        <Menu.Item key="/admin/recharts">ReCharts</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="richtext"
@@ -102,21 +102,21 @@ class Sidebar extends Component {
                             </span>
                         }
                     >
-                        <Menu.Item key="/home/richtext">富文本编辑器</Menu.Item>
-                        <Menu.Item key="/home/markdown">
+                        <Menu.Item key="/admin/richtext">富文本编辑器</Menu.Item>
+                        <Menu.Item key="/admin/markdown">
                             markdown编辑器
                         </Menu.Item>
-                        <Menu.Item key="/home/jsonedit">JSON编辑器</Menu.Item>
+                        <Menu.Item key="/admin/jsonedit">JSON编辑器</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="/home/table">
+                    <Menu.Item key="/admin/table">
                         <TableOutlined />
                         <span>Table</span>
                     </Menu.Item>
-                    <Menu.Item key="/home/form">
+                    <Menu.Item key="/admin/form">
                         <FormOutlined />
                         <span>Form</span>
                     </Menu.Item>
-                    <Menu.Item key="/home/typedplugin">
+                    <Menu.Item key="/admin/typedplugin">
                         <HighlightOutlined />
                         <span>TypedPlugin</span>
                     </Menu.Item>

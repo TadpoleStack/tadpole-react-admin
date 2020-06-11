@@ -18,7 +18,7 @@ class Login extends Component {
    handleSubmit(values) {
       if (values.username === 'Tadpole' && values.password === 'admin') {
          message.success('登录成功！')
-         this.props.history.push('/home')
+         this.props.history.push('/admin')
       } else message.error('登录失败！用户名和密码不匹配')
    }
    //阻止默认

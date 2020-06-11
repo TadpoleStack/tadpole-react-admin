@@ -11,7 +11,7 @@ const Start = React.lazy(() => import('@src/components/business/Start'))
 const TypedPlugin = React.lazy(() => import('@src/components/business/TypedPlugin'))
 const IconPage = React.lazy(() => import('@src/components/business/UI/IconPage'))
 
-class Home extends Component {
+class Admin extends Component {
    constructor(props) {
       super(props)
       this.state = {
@@ -55,26 +55,26 @@ class Home extends Component {
                      <Switch>
                         <Route
                            exact
-                           path="/home"
+                           path="/admin"
                            component={Start}
                         ></Route>
                         <Route
                            exact
-                           path="/home/iconpage"
+                           path="/admin/iconpage"
                            component={IconPage}
                         ></Route>
                         <Route
                            exact
-                           path="/home/typedplugin"
+                           path="/admin/typedplugin"
                            component={TypedPlugin}
                         ></Route>
                         <Route
                            exact
-                           path="/home/404"
+                           path="/admin/404"
                            component={NotFound}
                         ></Route>
                         <Route
-                           render={() => <Redirect to="/home/404" />}
+                           render={() => <Redirect to="/admin/404" />}
                         />
                      </Switch>
                      </React.Suspense>
@@ -89,4 +89,4 @@ class Home extends Component {
    }
 }
 
-export default Home
+export default Admin

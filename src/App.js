@@ -12,7 +12,7 @@ import ErrorBoundary from '@src/components/basics/ErrorBoundary'
 
 const Login = React.lazy(() => import('@src/components/basics/Login'))
 const NotFound = React.lazy(() => import('@src/components/basics/NotFound'))
-const Home = React.lazy(() => import('@src/components/business/Home'))
+const Admin = React.lazy(() => import('@src/components/business/Admin'))
 
 function App() {
    return (
@@ -22,7 +22,7 @@ function App() {
                   <Switch>
                      <Route exact path="/" render={() => <Redirect to="/login" push />}></Route>
                      <Route exact path="/login" component={Login}></Route>
-                     <Route path="/home" component={Home}></Route>
+                     <Route path="/admin" component={Admin}></Route>
                      <Route exact path="/404" component={NotFound}></Route>
                      <Route render={() => <Redirect to="/404" />} />
                   </Switch>
