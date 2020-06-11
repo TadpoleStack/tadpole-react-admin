@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import './index.scss'
 import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-const WebGLbg = React.$loadable(() => import('@src/components/basics/WebGLbg'))
-const Timer = React.$loadable(() => import('@src/components/basics/Timer'))
+import LazyLoading from '@src/components/basics/LazyLoading'
+import ErrorBoundary from '@src/components/basics/ErrorBoundary'
+const WebGLbg = React.lazy(() => import('@src/components/basics/WebGLbg'))
+const Timer = React.lazy(() => import('@src/components/basics/Timer'))
 
 class Login extends Component {
    constructor(props) {
@@ -26,11 +28,15 @@ class Login extends Component {
    render() {
       return (
          <div className="login-wrap" onContextMenu={this.prevetDefault}>
-            <WebGLbg></WebGLbg>
-            <Timer
-               width={window.innerWidth / 3}
-               height={window.innerHeight}
-            ></Timer>
+            <ErrorBoundary>
+               <React.Suspense  fallback={<LazyLoading style={{zIndex:10000,position:'fixed'}} />}>
+                  <WebGLbg></WebGLbg>
+                  <Timer
+                     width={window.innerWidth / 3}
+                     height={window.innerHeight}
+                  ></Timer>
+               </React.Suspense>
+            </ErrorBoundary>
             <div
                className="login-form-wrap"
                style={{

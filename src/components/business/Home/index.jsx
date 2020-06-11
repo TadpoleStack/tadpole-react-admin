@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
-const Header = React.$loadable(() => import('@src/components/basics/Header'))
-const Sidebar = React.$loadable(() => import('@src/components/basics/Sidebar'))
-const NotFound = React.$loadable(() => import('@src/components/basics/NotFound'))
-const Start = React.$loadable(() => import('@src/components/business/Start'))
-const TypedPlugin = React.$loadable(() => import('@src/components/business/TypedPlugin'))
-const IconPage = React.$loadable(() => import('@src/components/business/UI/IconPage'))
+import LazyLoading from '@src/components/basics/LazyLoading'
+import ErrorBoundary from '@src/components/basics/ErrorBoundary'
+const Header = React.lazy(() => import('@src/components/basics/Header'))
+const Sidebar = React.lazy(() => import('@src/components/basics/Sidebar'))
+const NotFound = React.lazy(() => import('@src/components/basics/NotFound'))
+const Start = React.lazy(() => import('@src/components/business/Start'))
+const TypedPlugin = React.lazy(() => import('@src/components/business/TypedPlugin'))
+const IconPage = React.lazy(() => import('@src/components/business/UI/IconPage'))
 
 class Home extends Component {
    constructor(props) {
@@ -48,6 +50,8 @@ class Home extends Component {
                   {/* <TransitionGroup>
                      <CSSTransition classNames="fade" key={this.props.location.pathname} timeout={500}> */}
                   <Router>
+                  <ErrorBoundary>
+                    <React.Suspense fallback={<LazyLoading/>}>
                      <Switch>
                         <Route
                            exact
@@ -73,6 +77,8 @@ class Home extends Component {
                            render={() => <Redirect to="/home/404" />}
                         />
                      </Switch>
+                     </React.Suspense>
+                  </ErrorBoundary>
                   </Router>
                   {/* </CSSTransition>
                   </TransitionGroup> */}
