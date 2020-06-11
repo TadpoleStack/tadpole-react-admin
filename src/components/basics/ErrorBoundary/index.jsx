@@ -4,7 +4,7 @@ import { ErrorLoading } from './style'
 export default class ErrorBoundary extends Component {
    constructor(props) {
      super(props);
-     this.state = { hasError: true };
+     this.state = { hasError: false };
    }
  
    static getDerivedStateFromError(error) {
