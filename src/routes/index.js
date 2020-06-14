@@ -51,6 +51,6 @@ export const adminRoutes = [
       exact: true
    },
    {
-      render: () => <Redirect to="/admin/404" />
+      component: React.lazy(() => import('@src/components/basics/NotFound'))
    }
 ]
