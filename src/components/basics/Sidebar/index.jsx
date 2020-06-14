@@ -2,135 +2,196 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { SidebarWrap } from './style'
 import { Menu } from 'antd'
-import {
-    HomeOutlined,
-    AppstoreOutlined,
-    AreaChartOutlined,
-    EditOutlined,
-    TableOutlined,
-    FormOutlined,
-    HighlightOutlined,
-    QuestionOutlined,
-} from '@ant-design/icons'
-const { SubMenu } = Menu
+import { createFromIconfontCN } from '@ant-design/icons';
+const IconFont = createFromIconfontCN({
+   scriptUrl: '//at.alicdn.com/t/font_1883324_2lxdrlbk6en.js',
+});
 
 class Sidebar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isPC: this.props.isPC === undefined ? true : this.props.isPC,
-            width: this.props.width || '260px',
-            theme: 'dark',
-            current: '/admin',
-            sidebarState: false,
-        }
-    }
-    handleClick = e => {
-        this.props.history.push(e.key)
-        this.setState({
-            current: e.key,
-        })
-        if (!this.props.isPC) {
-            this.setState({ sidebarState: false })
-        }
-    }
-    EventEmitterListener() {
+   constructor(props) {
+      super(props)
+      this.state = {
+         isPC: this.props.isPC === undefined ? true : this.props.isPC,
+         width: this.props.width || '260px',
+         theme: 'dark',
+         current: '/admin',
+         sidebarState: false,
+         openKeys: [],
+         sidebarList: [//侧边栏导航
+            {
+               key: '/admin',
+               icon: 'Tadpoleshouye',
+               text: '首页'
+            },
+            {
+               key: 'ui',
+               icon: 'Tadpolegongju',
+               text: 'UI',
+               children: [
+                  {
+                     key: '/admin/iconpage',
+                     icon: 'Tadpoleview',
+                     text: '小图标',
+                  }
+               ]
+            },
+            {
+               key: 'charts',
+               icon: 'Tadpoletubiao1-copy',
+               text: 'charts',
+               children: [
+                  {
+                     key: '/admin/echarts',
+                     icon: 'Tadpoletubiao',
+                     text: 'Echarts'
+                  },
+                  {
+                     key: '/admin/highcharts',
+                     icon: 'Tadpoletubiaozhexiantu',
+                     text: 'HighCharts'
+                  },
+                  {
+                     key: '/admin/recharts',
+                     icon: 'Tadpoletubiao1',
+                     text: 'ReCharts'
+                  }
+               ]
+            },
+            {
+               key: 'richtext',
+               icon: 'Tadpoleedit-profile',
+               text: '富文本',
+               children: [
+                  {
+                     key: '/admin/richtext',
+                     icon: 'Tadpolexiepinglun',
+                     text: '富文本编辑器'
+                  },
+                  {
+                     key: '/admin/markdown',
+                     icon: 'Tadpoleedit1',
+                     text: 'markdown编辑器'
+                  },
+                  {
+                     key: '/admin/jsonedit',
+                     icon: 'Tadpoleedit',
+                     text: 'JSON编辑器'
+                  }
+               ]
+            },
+            {
+               key: '/admin/table',
+               icon: 'Tadpoletable1',
+               text: 'Table'
+            },
+            {
+               key: '/admin/form',
+               icon: 'Tadpole17',
+               text: 'Form'
+            },
+            {
+               key: '/admin/typedplugin',
+               icon: 'TadpoleLC_icon_edit_line_1',
+               text: 'TypedPlugin'
+            },
+            {
+               key: '/404',
+               icon: 'Tadpoleapptubiao-',
+               text: '404'
+            },
+            {
+               key: '/login',
+               icon: 'Tadpoleai207',
+               text: '返回登录'
+            },
+         ]
+      }
+   }
+   /**
+    * 点击跳转路由
+    * @param {*} e 
+    */
+   handleClick = e => {
+      if (e.keyPath.length < 2) this.setState({ openKeys: [] })
+      this.props.history.push(e.key)
+      this.setState({ current: e.key })
+      if (!this.props.isPC) this.setState({ sidebarState: false })
+
+   }
+   /**
+    * 侧边栏折叠
+    * @param {*} openKeys 
+    */
+   handleOpenChange = openKeys => {
+      if (openKeys[openKeys.length - 1]) {
+         this.setState({ openKeys: [openKeys[openKeys.length - 1]] })
+      } else {
+         this.setState({ openKeys: [] })
+      }
+   }
+   /**
+    * 初始化设置sidebar的高亮状态及展开项
+    */
+   initSidebarState() {
+      if (this.props.location.pathname) {
+         this.setState({ current: this.props.location.pathname })
+         let item = this.state.sidebarList.find(v => v.children && v.children.find(v2 => v2.key === this.props.location.pathname))
+         item && this.setState({ openKeys: [item.key] })
+      }
+   }
+   /**
+    * 监听事件分发处理sidebar状态
+    */
+   EventEmitterListener() {
       React.$eventEmitter.on('changeSidebarState', () => {
-            this.setState(state => {
-                return { sidebarState: !state.sidebarState }
-            })
-        })
-    }
-    componentDidMount() {
-        this.EventEmitterListener()
-    }
-    componentWillUnmount() {
+         this.setState(state => {
+            return { sidebarState: !state.sidebarState }
+         })
+      })
+   }
+   componentDidMount() {
+      this.EventEmitterListener()
+      this.initSidebarState()
+   }
+   componentWillUnmount() {
       React.$eventEmitter.removeAllListeners('changeSidebarState')
-    }
-    render() {
-        return (
-            <SidebarWrap
-                width={this.state.width}
-                isPC={this.state.isPC}
-                sidebarState={this.state.sidebarState}
+   }
+   render() {
+      return (
+         <SidebarWrap
+            width={this.state.width}
+            isPC={this.state.isPC}
+            sidebarState={this.state.sidebarState}
+         >
+            <Menu
+               theme={this.state.theme}
+               onClick={this.handleClick}
+               onOpenChange={this.handleOpenChange}
+               style={{ minHeight: '100%' }}
+               openKeys={this.state.openKeys}
+               selectedKeys={[this.state.current]}
+               mode="inline"
             >
-                <Menu
-                    theme={this.state.theme}
-                    onClick={this.handleClick}
-                    style={{ minHeight: '100%' }}
-                    defaultOpenKeys={['/admin']}
-                    selectedKeys={[this.state.current]}
-                    mode="inline"
-                    inlineCollapsed={
-                        this.props.isPC ? !this.state.sidebarState : false
-                    }
-                >
-                    <Menu.Item key="/admin">
-                        <HomeOutlined />
-                        <span>首页</span>
-                    </Menu.Item>
-                    <SubMenu
-                        key="ui"
-                        title={
-                            <span>
-                                <AppstoreOutlined />
-                                <span>UI</span>
-                            </span>
-                        }
-                    >
-                        <Menu.Item key="/admin/iconpage">小图标</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="charts"
-                        title={
-                            <span>
-                                <AreaChartOutlined />
-                                <span>charts</span>
-                            </span>
-                        }
-                    >
-                        <Menu.Item key="/admin/echarts">Echarts</Menu.Item>
-                        <Menu.Item key="/admin/highcharts">HighCharts</Menu.Item>
-                        <Menu.Item key="/admin/recharts">ReCharts</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="richtext"
-                        title={
-                            <span>
-                                <EditOutlined />
-                                <span>富文本</span>
-                            </span>
-                        }
-                    >
-                        <Menu.Item key="/admin/richtext">富文本编辑器</Menu.Item>
-                        <Menu.Item key="/admin/markdown">
-                            markdown编辑器
+               {
+                  this.state.sidebarList.map(item => {
+                     return item.children && item.children.length > 0
+                        ? <Menu.SubMenu
+                           key={item.key}
+                           icon={item.icon ? <IconFont type={item.icon} /> : null}
+                           title={item.text}>
+                           {item.children.map(subItem =>
+                              <Menu.Item key={subItem.key} icon={subItem.icon ? <IconFont type={subItem.icon} /> : null}>
+                                 {subItem.text}
+                              </Menu.Item>)}
+                        </Menu.SubMenu>
+                        : <Menu.Item key={item.key} icon={item.icon ? <IconFont type={item.icon} /> : null}>
+                           {item.text}
                         </Menu.Item>
-                        <Menu.Item key="/admin/jsonedit">JSON编辑器</Menu.Item>
-                    </SubMenu>
-                    <Menu.Item key="/admin/table">
-                        <TableOutlined />
-                        <span>Table</span>
-                    </Menu.Item>
-                    <Menu.Item key="/admin/form">
-                        <FormOutlined />
-                        <span>Form</span>
-                    </Menu.Item>
-                    <Menu.Item key="/admin/typedplugin">
-                        <HighlightOutlined />
-                        <span>TypedPlugin</span>
-                    </Menu.Item>
-                    <Menu.Item key="/404">
-                        <QuestionOutlined />
-                        <span>404</span>
-                    </Menu.Item>
-                    <Menu.Item key="/login">
-                        <QuestionOutlined />
-                        <span>返回登录</span>
-                    </Menu.Item>
-                </Menu>
-            </SidebarWrap>
-        )
-    }
+                  })
+               }
+            </Menu>
+         </SidebarWrap>
+      )
+   }
 }
 export default withRouter(Sidebar)
