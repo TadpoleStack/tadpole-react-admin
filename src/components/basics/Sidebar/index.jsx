@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { SidebarWrap } from './style'
 import { Menu } from 'antd'
-import { createFromIconfontCN } from '@ant-design/icons';
-const IconFont = createFromIconfontCN({
-   scriptUrl: '//at.alicdn.com/t/font_1883324_2lxdrlbk6en.js',
-});
+import IconFont from '@src/components/basics/IconFont'
 
 class Sidebar extends Component {
    constructor(props) {
