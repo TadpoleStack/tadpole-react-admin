@@ -4,10 +4,12 @@ import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import LazyLoading from '@src/components/basics/LazyLoading'
 import ErrorBoundary from '@src/components/basics/ErrorBoundary'
+import {ResponsiveContext} from '@src/context'
 const WebGLbg = React.lazy(() => import('@src/components/basics/WebGLbg'))
 const Timer = React.lazy(() => import('@src/components/basics/Timer'))
 
 class Login extends Component {
+   static contextType = ResponsiveContext;
    constructor(props) {
       super(props)
       this.state = {
@@ -24,6 +26,9 @@ class Login extends Component {
    //阻止默认
    prevetDefault(e) {
       e.preventDefault()
+   }
+   componentDidMount(){
+      console.info('props',this.context)
    }
    render() {
       return (
@@ -88,5 +93,4 @@ class Login extends Component {
       )
    }
 }
-
 export default Login
