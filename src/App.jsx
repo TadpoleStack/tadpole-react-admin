@@ -2,7 +2,7 @@ import React from 'react';
 import {
    HashRouter as Router,
    Switch,
-   Route,
+   Route
 } from 'react-router-dom'
 import './App.scss';
 import 'animate.css'
@@ -15,8 +15,24 @@ class App extends React.Component{
    constructor(props){
       super(props)
       this.state = {
-         ResponsiveValue:{currdevice:'PC',responsiveDevice:{'PC':'curr>=1366','MOBILE':'curr<768','TABLET_PC':'curr>=768&&curr<1366'}}
+         ResponsiveValue:{currdevice:'PC'},
       }
+   }
+   /**
+    * 计算窗口宽度-对应响应的响应设备
+    */
+   resizeComputed(){
+      const responsiveDevice = {'PC':'curr>=992','MOBILE':'curr<992'}
+      const width = (document.body&&document.body.clientHeight) || (document.documentElement&&document.documentElement.clientWidth) ||(window&&window.innerWidth)
+      for (let item in responsiveDevice) {
+         let element = responsiveDevice[item];
+         element = element.replace('curr',width)
+         element&&eval(element)&&this.setState({ResponsiveValue:{currdevice:item}})
+      }
+   }
+   componentDidMount(){
+      this.resizeComputed()
+      window.addEventListener('resize',this.resizeComputed.bind(this))
    }
    render(){
       return(

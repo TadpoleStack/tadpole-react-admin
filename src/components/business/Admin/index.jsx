@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, withRouter } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
 import LazyLoading from '@src/components/basics/LazyLoading'
@@ -19,8 +19,6 @@ class Admin extends Component {
          isPC: window.innerWidth >= 768,
       }
    }
-
-   componentWillMount() { }
    render() {
       return (
          <div style={{ width: '100%', height: '100%' }}>
@@ -38,9 +36,7 @@ class Admin extends Component {
             >
                <Sidebar
                   isPC={this.state.isPC}
-                  width={
-                     this.state.isPC ? this.state.sidebarWidth : '100%'
-                  }
+                  width={this.state.sidebarWidth}
                />
                <div
                   style={{ height: '100%', flex: 1, overflowY: 'hidden' }}
@@ -69,4 +65,4 @@ class Admin extends Component {
    }
 }
 
-export default Admin
+export default withRouter(Admin)

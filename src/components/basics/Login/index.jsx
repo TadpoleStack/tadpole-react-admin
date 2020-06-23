@@ -10,12 +10,6 @@ const Timer = React.lazy(() => import('@src/components/basics/Timer'))
 
 class Login extends Component {
    static contextType = ResponsiveContext;
-   constructor(props) {
-      super(props)
-      this.state = {
-         Timer: null,
-      }
-   }
 
    handleSubmit(values) {
       if (values.username === 'Tadpole' && values.password === 'admin') {
@@ -26,9 +20,6 @@ class Login extends Component {
    //阻止默认
    prevetDefault(e) {
       e.preventDefault()
-   }
-   componentDidMount(){
-      console.info('props',this.context)
    }
    render() {
       return (

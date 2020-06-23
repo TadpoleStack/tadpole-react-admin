@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SidebarWrap = styled.div`
-    width: ${props => props.isPC ? (props.sidebarState ? props.width : 'auto') : props.width};
+    width: ${props =>props.width};
     position: ${props => (props.isPC ? 'static' : 'absolute')};
     top: 0;
     left: ${props => (props.sidebarState ? 0 : '-100%')};
