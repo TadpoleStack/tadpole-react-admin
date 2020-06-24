@@ -5,7 +5,6 @@ import './index.scss'
 import LazyLoading from '@src/components/basics/LazyLoading'
 import ErrorBoundary from '@src/components/basics/ErrorBoundary'
 import { adminRoutes } from '@src/routes'
-
 const Header = React.lazy(() => import('@src/components/basics/Header'))
 const Sidebar = React.lazy(() => import('@src/components/basics/Sidebar'))
 
@@ -14,16 +13,14 @@ class Admin extends Component {
       super(props)
       this.state = {
          windowWidth: window.innerWidth + 'px',
-         headerHeight: window.innerWidth >= 768 ? '80px' : '60px',
+         headerHeight: '60px',
          sidebarWidth: '260px',
-         isPC: window.innerWidth >= 768,
       }
    }
    render() {
       return (
          <div style={{ width: '100%', height: '100%' }}>
             <Header
-               isPC={this.state.isPC}
                height={this.state.headerHeight}
             />
             <div
@@ -35,7 +32,6 @@ class Admin extends Component {
                }}
             >
                <Sidebar
-                  isPC={this.state.isPC}
                   width={this.state.sidebarWidth}
                />
                <div

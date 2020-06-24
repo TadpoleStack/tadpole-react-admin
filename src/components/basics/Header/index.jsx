@@ -3,12 +3,15 @@ import { HeaderWrap } from './style'
 import { Button, Avatar } from 'antd'
 import { MenuFoldOutlined } from '@ant-design/icons'
 import './index.scss'
+import {ResponsiveContext} from '@src/context'
+
 export default class Header extends Component {
+    static contextType = ResponsiveContext;
+
     constructor(props) {
         super(props)
         this.state = {
             height: this.props.height || '60px',
-            isPC: this.props.isPC,
         }
     }
     changeSidebarState() {
@@ -46,7 +49,7 @@ export default class Header extends Component {
                     }}
                 >
                     <Avatar
-                        size={this.state.isPC ? 64 : 48}
+                        size={this.context==='PC'? 48 : 42}
                         src="https://s.gravatar.com/avatar/4770ccdd197bff1ab146a978c26cca6a?s=128&r=X"
                     />
                 </div>

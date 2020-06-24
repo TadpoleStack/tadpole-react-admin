@@ -15,7 +15,7 @@ class App extends React.Component{
    constructor(props){
       super(props)
       this.state = {
-         ResponsiveValue:{currdevice:'PC'},
+         ResponsiveValue:'PC',
       }
    }
    /**
@@ -23,11 +23,11 @@ class App extends React.Component{
     */
    resizeComputed(){
       const responsiveDevice = {'PC':'curr>=992','MOBILE':'curr<992'}
-      const width = (document.body&&document.body.clientHeight) || (document.documentElement&&document.documentElement.clientWidth) ||(window&&window.innerWidth)
+      const width = (document.body&&document.body.clientWidth) || (document.documentElement&&document.documentElement.clientWidth) ||(window&&window.innerWidth)
       for (let item in responsiveDevice) {
          let element = responsiveDevice[item];
          element = element.replace('curr',width)
-         element&&eval(element)&&this.setState({ResponsiveValue:{currdevice:item}})
+         element&&eval(element)&&this.setState({ResponsiveValue:item})
       }
    }
    componentDidMount(){

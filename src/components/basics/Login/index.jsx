@@ -35,9 +35,7 @@ class Login extends Component {
             </ErrorBoundary>
             <div
                className="login-form-wrap"
-               style={{
-                  width: window.innerWidth < 768 ? '280px' : '360px',
-               }}
+               style={{ width: this.context==='PC'? '360px' : '280px' }}
             >
                <h2 align="center">Tadpole React Admin</h2>
                <Form onFinish={this.handleSubmit.bind(this)}>
