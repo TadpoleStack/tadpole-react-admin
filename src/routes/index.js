@@ -13,10 +13,6 @@ export const mainRoutes = [
       exact: true
    },
    {
-      path: '/admin',
-      component: React.lazy(() => import('@src/components/business/Admin'))
-   },
-   {
       path: '/404',
       component: React.lazy(() => import('@src/components/basics/NotFound')),
       exact: true
