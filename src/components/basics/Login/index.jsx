@@ -4,7 +4,7 @@ import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import LazyLoading from '@src/components/basics/LazyLoading'
 import ErrorBoundary from '@src/components/basics/ErrorBoundary'
-import {ResponsiveContext} from '@src/context'
+import { ResponsiveContext } from '@src/context'
 const WebGLbg = React.lazy(() => import('@src/components/basics/WebGLbg'))
 const Timer = React.lazy(() => import('@src/components/basics/Timer'))
 
@@ -13,6 +13,7 @@ class Login extends Component {
 
    handleSubmit(values) {
       if (values.username === 'Tadpole' && values.password === 'admin') {
+         React.$setToken('Tadpole')
          message.success('登录成功！')
          this.props.history.push('/admin')
       } else message.error('登录失败！用户名和密码不匹配')
@@ -25,7 +26,7 @@ class Login extends Component {
       return (
          <div className="login-wrap" onContextMenu={this.prevetDefault}>
             <ErrorBoundary>
-               <React.Suspense  fallback={<LazyLoading style={{zIndex:10000,position:'fixed'}} />}>
+               <React.Suspense fallback={<LazyLoading style={{ zIndex: 10000, position: 'fixed' }} />}>
                   <WebGLbg></WebGLbg>
                   <Timer
                      width={window.innerWidth / 3}
@@ -35,7 +36,7 @@ class Login extends Component {
             </ErrorBoundary>
             <div
                className="login-form-wrap"
-               style={{ width: this.context==='PC'? '360px' : '280px' }}
+               style={{ width: this.context === 'PC' ? '360px' : '280px' }}
             >
                <h2 align="center">Tadpole React Admin</h2>
                <Form onFinish={this.handleSubmit.bind(this)}>

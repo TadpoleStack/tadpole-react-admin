@@ -10,9 +10,7 @@ export const setToken = token => {
 /**
  * 获取token
  */
-export const getToken = () => {
-   localStorage.getItem(TOKEN)
-}
+export const getToken = () => localStorage.getItem(TOKEN)
 /**
  * 删除token
  */

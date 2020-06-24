@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Switch, Route, withRouter } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
 import LazyLoading from '@src/components/basics/LazyLoading'
@@ -45,7 +45,9 @@ class Admin extends Component {
                            <Switch>
                               {
                                  adminRoutes.map((route, index) => {
-                                    return <Route {...route} key={this.props.match.path + index}></Route>
+                                    return React.$getToken()
+                                       ? <Route {...route} key={this.props.match.path + index}></Route>
+                                       : <Redirect to="/login" />
                                  })
                               }
                            </Switch>
