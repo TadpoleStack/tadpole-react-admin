@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { SidebarWrap } from './style'
 import { Menu } from 'antd'
 import IconFont from '@src/components/basics/IconFont'
-import {ResponsiveContext} from '@src/context'
+import { ResponsiveContext } from '@src/context'
 
 class Sidebar extends Component {
    static contextType = ResponsiveContext;
@@ -114,7 +114,7 @@ class Sidebar extends Component {
       if (e.keyPath.length < 2) this.setState({ openKeys: [] })
       this.props.history.push(e.key)
       this.setState({ current: e.key })
-      if (this.context==='MOBILE') this.setState({ sidebarState: false })
+      if (this.context === 'MOBILE') this.setState({ sidebarState: false })
 
    }
    /**
@@ -159,7 +159,7 @@ class Sidebar extends Component {
       return (
          <SidebarWrap
             width={this.state.width}
-            device={this.context==='PC'}
+            device={this.context}
             sidebarState={this.state.sidebarState}
          >
             <Menu
