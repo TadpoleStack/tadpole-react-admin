@@ -79,9 +79,16 @@ class Sidebar extends Component {
                ]
             },
             {
-               key: '/admin/table',
+               key:'table',
                icon: 'Tadpoletable1',
-               text: 'Table'
+               text: 'Table',
+               children: [
+                  {
+                     key: '/admin/simpletable',
+                     icon: 'Tadpoletable1',
+                     text: 'SimpleTable'
+                  },
+               ]
             },
             {
                key: '/admin/form',

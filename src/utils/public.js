@@ -5,15 +5,15 @@ const TOKEN = 'Tadpole_TOKEN'
  * @param {token} token 
  */
 export const setToken = token => {
-   localStorage.setItem(TOKEN, token)
+   sessionStorage.setItem(TOKEN, token)
 }
 /**
  * 获取token
  */
-export const getToken = () => localStorage.getItem(TOKEN)
+export const getToken = () => sessionStorage.getItem(TOKEN)
 /**
  * 删除token
  */
 export const clearToken = () => {
-   localStorage.removeItem(TOKEN)
+   sessionStorage.removeItem(TOKEN)
 }

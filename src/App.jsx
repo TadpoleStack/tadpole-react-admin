@@ -1,6 +1,7 @@
 import React from 'react';
 import {
    HashRouter as Router,
+   Redirect,
    Switch,
    Route
 } from 'react-router-dom'
@@ -43,7 +44,10 @@ class App extends React.Component {
                <ErrorBoundary>
                   <React.Suspense fallback={<LazyLoading style={{ zIndex: 10000, position: 'fixed' }} />}>
                      <Switch>
-                        <Route path="/admin" render={routeProps => <Admin {...routeProps}></Admin>}></Route>
+                        <Route path="/admin" render={routeProps => React.$getToken()
+                           ?<Admin {...routeProps}></Admin>
+                           :<Redirect to="/login" />
+                        }></Route>
                         {
                            mainRoutes.map((route, index) => {
                               return <Route {...route} key={index}></Route>

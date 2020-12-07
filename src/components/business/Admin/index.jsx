@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Switch, withRouter } from 'react-router-dom'
+import { HashRouter as Router, Route, Redirect, Switch, withRouter } from 'react-router-dom'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.scss'
 import LazyLoading from '@src/components/basics/LazyLoading'
@@ -7,7 +7,7 @@ import ErrorBoundary from '@src/components/basics/ErrorBoundary'
 import { adminRoutes } from '@src/routes'
 const Header = React.lazy(() => import('@src/components/basics/Header'))
 const Sidebar = React.lazy(() => import('@src/components/basics/Sidebar'))
-const AuthRoute = React.lazy(() => import('@src/components/basics/AuthRoute'))
+// const AuthRoute = React.lazy(() => import('@src/components/basics/AuthRoute'))
 
 class Admin extends Component {
    constructor(props) {
@@ -46,7 +46,10 @@ class Admin extends Component {
                            <Switch>
                               {
                                  adminRoutes.map((route, index) => {
-                                    return <AuthRoute route={route} key={this.props.match.path + index}></AuthRoute>
+                                    // return <AuthRoute route={route} key={route.path + index}></AuthRoute>
+                                    return React.$getToken()
+                                    ? <Route {...route} key={route.path+''+index}></Route>
+                                    : <Redirect to="/login" />
                                  })
                               }
                            </Switch>
