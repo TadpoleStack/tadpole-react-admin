@@ -5,35 +5,66 @@ export default class SimpleTable extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            dataSource :[]
+            dataSource :[],
+            loading:false,
         }
     }
+    getUserList = async ()=>{
+      this.setState({loading:true})
+      let res = await React.$api.user.getUserList()
+      res.data = res.data.map((value,index)=>{
+        value.key = index
+        return value
+      })
+      setTimeout(()=>{//延迟一下展现表格加载数据动画
+        this.setState({dataSource:res.data,loading:false})
+      },2000)
+    }
     componentDidMount(){
-        const dataSource = [{
-            key: '1',
-            name: 'Tadpole',
-            age: 23,
-            address: '陕西省西安市雁塔区永利国际金融中心',
-          },
-          {
-            key: '2',
-            name: 'Tadpole2',
-            age: 24,
-            address: '浙江省杭州市余杭区思创医惠产业园',
-          }]
-        this.setState({dataSource:dataSource})
+      this.getUserList()
     }
     render(){
         const columns = [
             {
               title: '姓名',
               dataIndex: 'name',
-              key: 'name',
+              key: 'name'
             },
             {
               title: '年龄',
               dataIndex: 'age',
               key: 'age',
+              // sorter: (a, b) => a.age - b.age
+              sorter: {
+                compare: (a, b) => a.age - b.age,
+                multiple: 3,
+              },
+            },
+            {
+              title: '性别',
+              dataIndex: 'sex',
+              key:'sex',
+              render:sex=><span>{sex===1?'男':sex===0?'女':'--'}</span>
+            },
+            {
+              title: '身高',
+              dataIndex: 'height',
+              key:'height',
+              // sorter: (a, b) => a.height - b.height
+              sorter: {
+                compare: (a, b) => a.height - b.height,
+                multiple: 2,
+              },
+            },
+            {
+              title: 'weight',
+              dataIndex: 'weight',
+              key: 'weight',
+              // sorter: (a, b) => a.weight - b.weight
+              sorter: {
+                compare: (a, b) => a.weight - b.weight,
+                multiple: 1,
+              },
             },
             {
               title: '住址',
@@ -43,7 +74,15 @@ export default class SimpleTable extends React.Component{
         ]
         return(
             <div>
-                <Table dataSource={this.state.dataSource} columns={columns}></Table>
+                <Table
+                  rowSelection={{type:'checkbox'||'radio'}}
+                  dataSource={this.state.dataSource}
+                  columns={columns}
+                  bordered
+                  loading={this.state.loading}
+                  title={() => <div align="center">SimpleTable</div>}
+                  footer={() => <span>功能：前端分页、排序、多列排序、多选、单选、远程加载数据、页头、页脚</span>}
+                ></Table>
             </div>
         )
     }

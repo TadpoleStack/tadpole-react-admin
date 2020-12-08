@@ -30,7 +30,7 @@ class App extends React.Component {
       for (let item in responsiveDevice) {
          let element = responsiveDevice[item];
          element = element.replace('curr', width)
-         element && eval(element) && this.setState({ ResponsiveValue: item })
+         element && React.$evil(element) && this.setState({ ResponsiveValue: item })
       }
    }
    componentDidMount() {

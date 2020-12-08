@@ -36,7 +36,7 @@ class Admin extends Component {
                   width={this.state.sidebarWidth}
                />
                <div
-                  style={{ height: '100%', flex: 1, overflowY: 'hidden' }}
+                  style={{ height: '100%', flex: 1, overflowY: 'scroll' }}
                >
                   {/* <TransitionGroup>
                      <CSSTransition classNames="fade" key={this.props.location.pathname} timeout={500}> */}
