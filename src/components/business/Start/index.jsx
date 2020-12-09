@@ -25,8 +25,7 @@ export default class Start extends Component {
                 style={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: '#fff',
-                    overflowY: 'scroll',
+                    backgroundColor: '#fff'
                 }}
             >
                 <span id="typed-box"></span>
