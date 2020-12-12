@@ -3,10 +3,12 @@
  */
 import * as code from './code'
 import * as EventEmitter from './EventEmitter'
+import * as library from './library'
 import * as loadable from './loadable'
 import * as publicFn from './public'
 import * as api from '@src/api'
-const global_method = { ...code, ...EventEmitter, ...loadable, ...publicFn, ...api }
+
+const global_method = { ...code, ...EventEmitter, ...library, ...loadable, ...publicFn, ...api }
 
 const addGlobalMethods = React => {
    for (const key in global_method) {
@@ -16,5 +18,4 @@ const addGlobalMethods = React => {
    }
    window.React = React
 }
-
 export default addGlobalMethods

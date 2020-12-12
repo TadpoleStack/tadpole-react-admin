@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button, Space, Switch} from 'antd';
+import { Table, Button, Space, Switch, Tooltip} from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 export default class SimpleTable extends React.Component{
@@ -128,6 +128,14 @@ export default class SimpleTable extends React.Component{
               dataIndex: 'address',
               key: 'address',
               // ellipsis: true,
+              ellipsis: {
+                showTitle: false
+              },
+              render: address => (
+                <Tooltip placement="topLeft" title={address}>
+                  {address}
+                </Tooltip>
+              )
             },
             {
               title: '操作',
@@ -162,9 +170,11 @@ export default class SimpleTable extends React.Component{
                   bordered
                   loading={loading}
                   title={() => <TableTitle></TableTitle>}
-                  footer={() => <span>功能：前端分页、排序筛选、多列排序、可控排序筛选、多选单选操作、远程加载数据、页头、页脚、固定头和列</span>}
+                  footer={() => <span>功能：前端分页、排序筛选、多列排序、可控排序筛选、多选单选操作、远程加载数据、页头、页脚、固定头和列、单元格自动省略、自定义单元格省略</span>}
                   onChange={this.handleChange}
-                  pagination={{ pageSize: 10 }} scroll={{x:1000, y: 'calc(100vh - 300px)' }}
+                  pagination={{ pageSize: 10 }}
+                  scroll={{x:1000, y: 'calc(100vh - 300px)' }}
+                  sticky
                 ></Table>
             </div>
         )

@@ -40,20 +40,20 @@ class Sidebar extends Component {
                text: 'charts',
                children: [
                   {
-                     key: '/admin/echarts',
+                     key: '/admin/echartsmap',
                      icon: 'Tadpoletubiao',
-                     text: 'Echarts'
+                     text: 'EchartsMap'
                   },
-                  {
-                     key: '/admin/highcharts',
-                     icon: 'Tadpoletubiaozhexiantu',
-                     text: 'HighCharts'
-                  },
-                  {
-                     key: '/admin/recharts',
-                     icon: 'Tadpoletubiao1',
-                     text: 'ReCharts'
-                  }
+                  // {
+                  //    key: '/admin/highcharts',
+                  //    icon: 'Tadpoletubiaozhexiantu',
+                  //    text: 'HighCharts'
+                  // },
+                  // {
+                  //    key: '/admin/recharts',
+                  //    icon: 'Tadpoletubiao1',
+                  //    text: 'ReCharts'
+                  // }
                ]
             },
             {
@@ -88,6 +88,16 @@ class Sidebar extends Component {
                      icon: 'Tadpoletable1',
                      text: 'SimpleTable'
                   },
+                  {
+                     key: '/admin/sortablehoctable',
+                     icon: 'Tadpoletable1',
+                     text: 'SortableHocTable'
+                  },
+                  {
+                     key: '/admin/editabletable',
+                     icon: 'Tadpoletable1',
+                     text: 'EditableTable'
+                  }
                ]
             },
             {

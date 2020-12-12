@@ -37,8 +37,23 @@ export const adminRoutes = [
       exact: true
    },
    {
+      path: '/admin/echartsmap',
+      component: React.lazy(() => import('@src/components/business/Charts/EchartsMap')),
+      exact: true
+   },
+   {
       path: '/admin/simpletable',
       component: React.lazy(() => import('@src/components/business/Table/SimpleTable')),
+      exact: true
+   },
+   {
+      path: '/admin/sortablehoctable',
+      component: React.lazy(() => import('@src/components/business/Table/SortableHocTable')),
+      exact: true
+   },
+   {
+      path: '/admin/editabletable',
+      component: React.lazy(() => import('@src/components/business/Table/EditableTable')),
       exact: true
    },
    {
