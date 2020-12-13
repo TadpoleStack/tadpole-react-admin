@@ -57,7 +57,7 @@ class Sidebar extends Component {
                ]
             },
             {
-               key: 'richtext',
+               key: 'rich',
                icon: 'Tadpoleedit-profile',
                text: '富文本',
                children: [

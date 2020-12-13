@@ -42,6 +42,10 @@ export const adminRoutes = [
       exact: true
    },
    {
+      path: '/admin/richtext',
+      component: React.lazy(() => import('@src/components/business/Rich/RichText'))
+   },
+   {
       path: '/admin/simpletable',
       component: React.lazy(() => import('@src/components/business/Table/SimpleTable')),
       exact: true
