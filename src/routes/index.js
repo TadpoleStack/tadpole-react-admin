@@ -61,6 +61,11 @@ export const adminRoutes = [
       exact: true
    },
    {
+      path: '/admin/dataexport',
+      component: React.lazy(() => import('@src/components/business/DataExport')),
+      exact: true
+   },
+   {
       path: '/admin/typedplugin',
       component: React.lazy(() => import('@src/components/business/TypedPlugin')),
       exact: true

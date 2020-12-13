@@ -64,7 +64,7 @@ class Sidebar extends Component {
                   {
                      key: '/admin/richtext',
                      icon: 'Tadpolexiepinglun',
-                     text: '富文本编辑器'
+                     text: 'BraftEditor'
                   },
                   {
                      key: '/admin/markdown',
@@ -104,6 +104,11 @@ class Sidebar extends Component {
                key: '/admin/form',
                icon: 'Tadpole17',
                text: 'Form'
+            },
+            {
+               key: '/admin/dataexport',
+               icon: 'Tadpole17',
+               text: '数据导出'
             },
             {
                key: '/admin/typedplugin',
