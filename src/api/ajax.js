@@ -1,4 +1,6 @@
 import axios from "axios";
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { getToken } from '@src/utils/public';
 const baseURL = '/';
 const timeout = 80 * 1000;
@@ -31,6 +33,7 @@ const afterHook = res => {
 
 ajax.interceptors.request.use(
   config => {
+    Nprogress.start()
     const token = getToken()
     if (token) {
       config.headers["Authorization"] = "Bearer " + token;
@@ -46,6 +49,7 @@ ajax.interceptors.request.use(
 );
 
 ajax.interceptors.response.use(res => {
+  Nprogress.done()
   let errcode = res.data.errcode
   if (errcode === 10001) {
     sessionStorage.clear();

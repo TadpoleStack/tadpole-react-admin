@@ -67,7 +67,7 @@ class Sidebar extends Component {
                      text: 'BraftEditor'
                   },
                   {
-                     key: '/admin/markdown',
+                     key: '/admin/richmarkdown',
                      icon: 'Tadpoleedit1',
                      text: 'markdown编辑器'
                   },

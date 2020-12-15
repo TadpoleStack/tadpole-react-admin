@@ -7,7 +7,8 @@ class EchartsMap extends React.Component{
         currMap:null,//当前地图
         mapHistory:[],//切换地图历史记录
         once:false,//事件监听只监听一次
-        changeAnimateSign:'in'//切换地图根据向下为 in 向上为 out
+        changeAnimateSign:'in',//切换地图根据向下为 in 向上为 out
+        styleStr:``
     }
     echartsBox = React.createRef()
     getMapData = async (nextMapData={})=> {
@@ -68,7 +69,7 @@ class EchartsMap extends React.Component{
             animationDurationUpdate:1000
           }
         
-        this.echartsBox.current.setAttribute('class',`echarts-map hide-${changeAnimateSign}`)
+        this.echartsBox.current.setAttribute('class',`echarts-map ${changeAnimateSign==='in'?'transformCSS':''} hide-${changeAnimateSign}`)
         setTimeout(() => {
             Instance.setOption(option,true)
             if(!once){//只监听一次
@@ -85,9 +86,17 @@ class EchartsMap extends React.Component{
             setTimeout(() => {this.echartsBox.current.setAttribute('class',`echarts-map show-${changeAnimateSign}`)}, 100);
         }, 400);
     }
+    /**
+     * 点击区域切换并存储切换记录
+     * @param {*} item 
+     */
     echartsClick = item => {
         const {currMap, mapHistory} = this.state
         if(item.componentType==='geo'){
+            const {offsetX,offsetY} = item.event
+            const {clientWidth,clientHeight} = this.echartsBox.current
+            let styleStr = `.transformCSS{transform:translateX(${(clientWidth/2 - offsetX)*10}px) translateY(${(clientHeight/2 - offsetY)*10}px) scale(10);}`
+            this.setState({styleStr})
             const nextMapData = currMap.features.find(v=>v.properties.name===item.name)
             if(nextMapData&&currMap.features.length!==1){
                 this.setState({changeAnimateSign:'in'})
@@ -98,7 +107,9 @@ class EchartsMap extends React.Component{
             }
         }
     }
-
+    /**
+     * 点击空白返回并删除记录
+     */
     clickBlank = () =>{
         const {mapHistory} = this.state
         this.setState({changeAnimateSign:'out'})
@@ -116,6 +127,7 @@ class EchartsMap extends React.Component{
     render(){
         return(
             <div className="echarts-map-page">
+                <style style={{display:'none'}}>{this.state.styleStr}</style>
                 <div ref={this.echartsBox} className="echarts-map">EchartsMap</div>
             </div>
         )
