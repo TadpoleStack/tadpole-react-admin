@@ -3,7 +3,8 @@ import { Table, Button, Space, Modal, Progress } from 'antd';
 import XLSX from 'xlsx';
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
-let base64 = ''
+const TadpoleFaceUrl = `https://s.gravatar.com/avatar/4770ccdd197bff1ab146a978c26cca6a?s=512&r=X`
+
 class DataExport extends React.Component{
     constructor(props){
         super(props)
@@ -23,7 +24,31 @@ class DataExport extends React.Component{
           sortedInfo: sorter,
         });
     }
-
+    /**
+     * 图片转base64
+     */
+    toBase64 = (params={})=>{
+        return new Promise(resolve=>{
+            try {       
+                params.type = params.type?params.type:'png'
+                params.quality = params.quality?params.quality:1
+                let image = new Image();
+                image.setAttribute('crossOrigin', 'anonymous');
+                image.src = params.url?params.url:params.img.src;
+                image.onload = ()=>{
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext("2d");
+                    ctx.drawImage(image, 0, 0, image.width, image.height);
+                    let base64 = canvas.toDataURL(`image/${params.type}`,params.quality)
+                    resolve(base64)
+                }
+            } catch (error) {
+                resolve(error)
+            }
+        },reject=>{
+            reject('')
+        })
+    }
     /**
      * 获取数据
      */
@@ -34,10 +59,6 @@ class DataExport extends React.Component{
           return value
         })
         this.setState({dataSource:res.data})
-    }
-    getBase64 = async ()=>{
-        let res = await React.$api.base64.getBase64('img1')
-        base64 = res.data
     }
     footer = ()=>{
         return(
@@ -64,32 +85,32 @@ class DataExport extends React.Component{
     /**
      * 数据导出
      */
-    dataExport = ()=>{
+    dataExport = async ()=>{
         const dom = this.tableDom.current
         const xlsx = XLSX.utils.table_to_sheet(dom)  
         const zip = new JSZip()       
-        zip.folder("photos").file("Tadpole.txt", "a folder with photos");//folder txt       
-        const imgBase64Str = base64//img      
+        zip.folder("documents").file("Tadpole.txt", "a folder with document");//folder txt       
+        let imgBase64Str = await this.toBase64({url:TadpoleFaceUrl,type:'jpeg'})//img  
+        imgBase64Str = imgBase64Str.replace('data:image/jpeg;base64,','')    
         zip.folder("images").file('img.jpg',imgBase64Str,{base64: true})      
         const excelFolder = zip.folder('excel')//excel      
-        const array = new Array(1000)       
+        const array = new Array(1000)
         for (let i = 0; i < array.length; i++) {         
             excelFolder.file(`${i}.xlsx`,XLSX.utils.sheet_to_html(xlsx))   
         }
         this.setState({visible:true})
-        zip.generateAsync({type : "blob"},(metadata)=>{//生成zip  //currentFile  percent
+        const blob = await zip.generateAsync({type : "blob"},(metadata)=>{//生成zip  //currentFile  percent
             let percent = parseInt(metadata.percent)
             if(metadata.percent&&parseInt(metadata.percent))
             this.setState({percent:percent})    
-        }).then((blob)=>{
-            this.setState({visible:false})
-            FileSaver.saveAs(blob, "Tadpole.zip",{ autoBom: true });  
         })
+        this.setState({visible:false})
+        FileSaver.saveAs(blob, "Tadpole.zip",{ autoBom: true });  
+        
     }
 
     componentDidMount(){
         this.getUserList()
-        this.getBase64()
     }
     render(){
         let { sortedInfo, filteredInfo, dataSource} = this.state
@@ -156,7 +177,7 @@ class DataExport extends React.Component{
                     pagination={false}
                     scroll={{x:1000, y: 'calc(100vh - 200px)' }}
                     sticky
-                    footer={this.footer}
+                    title={this.footer}
                     ></Table>
                 </div>
                 <this.ProgressTip></this.ProgressTip>
