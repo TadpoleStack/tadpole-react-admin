@@ -11,7 +11,7 @@ class Sidebar extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         width: this.props.width || '260px',
+         width: this.props.width || '200px',
          theme: 'dark',
          current: '/admin',
          sidebarState: false,
@@ -180,7 +180,7 @@ class Sidebar extends Component {
    render() {
       return (
          <SidebarWrap
-            width={this.state.width}
+            width={(this.context==='PC'&&this.state.sidebarState)?'80px':this.state.width}
             device={this.context}
             sidebarState={this.state.sidebarState}
          >
@@ -192,6 +192,7 @@ class Sidebar extends Component {
                openKeys={this.state.openKeys}
                selectedKeys={[this.state.current]}
                mode="inline"
+               inlineCollapsed={this.context==='PC'?this.state.sidebarState?true:false:false}
             >
                {
                   this.state.sidebarList.map(item => {
