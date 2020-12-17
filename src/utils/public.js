@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js'
 import screenfull from 'screenfull'
+import printJS from 'print-js'
 const TOKEN = 'Tadpole_TOKEN'
 
 /**
@@ -53,5 +54,6 @@ export {
    clearToken,
    evil,
    CryptoJS,
-   screenfull
+   screenfull,
+   printJS
 }
