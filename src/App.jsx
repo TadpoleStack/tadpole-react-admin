@@ -5,6 +5,7 @@ import {
    Switch,
    Route
 } from 'react-router-dom'
+import 'normalize.css'
 import './App.scss';
 import 'animate.css'
 import { ConfigProvider } from 'antd'

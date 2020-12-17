@@ -1,14 +1,13 @@
 /**
  * 添加全局方法
  */
-import * as code from './code'
 import * as EventEmitter from './EventEmitter'
 import * as library from './library'
 import * as loadable from './loadable'
 import * as publicFn from './public'
 import * as api from '@src/api'
 
-const global_method = { ...code, ...EventEmitter, ...library, ...loadable, ...publicFn, ...api }
+const global_method = { ...EventEmitter, ...library, ...loadable, ...publicFn, ...api }
 
 const addGlobalMethods = React => {
    for (const key in global_method) {
