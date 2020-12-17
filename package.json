@@ -15,7 +15,7 @@
     "craco-antd": "^1.19.0",
     "dayjs": "^1.9.7",
     "echarts": "^5.0.0",
-    "echarts-gl": "^1.1.1",
+    "echarts-gl": "^2.0.0-rc.1",
     "element-china-area-data": "^5.0.2",
     "events": "^3.2.0",
     "file-saver": "^2.0.5",
