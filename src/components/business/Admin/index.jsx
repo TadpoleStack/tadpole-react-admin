@@ -20,7 +20,6 @@ class Admin extends Component {
    }
    render() {
       const {location} = this.props
-      console.info(location)
       return (
          <div style={{ width: '100%', height: '100%' }}>
             <Header
