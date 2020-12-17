@@ -62,14 +62,19 @@ class Sidebar extends Component {
                text: '富文本',
                children: [
                   {
-                     key: '/admin/richtext',
+                     key: '/admin/braft',
                      icon: 'Tadpolexiepinglun',
                      text: 'BraftEditor'
                   },
                   {
-                     key: '/admin/richmarkdown',
+                     key: '/admin/reactquill',
+                     icon: 'Tadpolexiepinglun',
+                     text: 'ReactQuill'
+                  },
+                  {
+                     key: '/admin/vditormarkdown',
                      icon: 'Tadpoleedit1',
-                     text: 'markdown编辑器'
+                     text: 'Vditor'
                   },
                   {
                      key: '/admin/jsonedit',

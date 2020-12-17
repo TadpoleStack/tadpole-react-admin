@@ -2,7 +2,7 @@ import React from 'react'
 import Vditor from 'vditor'
 import "vditor/src/assets/scss/index.scss"
 
-class RichMarkdown extends React.Component{
+class VditorMarkdown extends React.Component{
     state = {
         vditor : null
     }
@@ -36,4 +36,4 @@ class RichMarkdown extends React.Component{
     }
 }
 
-export default RichMarkdown
+export default VditorMarkdown

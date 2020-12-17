@@ -42,13 +42,18 @@ export const adminRoutes = [
       exact: true
    },
    {
-      path: '/admin/richtext',
-      component: React.lazy(() => import('@src/components/business/Rich/RichText')),
+      path: '/admin/braft',
+      component: React.lazy(() => import('@src/components/business/Rich/Braft')),
       exact: true
    },
    {
-      path: '/admin/richmarkdown',
-      component: React.lazy(() => import('@src/components/business/Rich/RichMarkdown')),
+      path: '/admin/reactquill',
+      component: React.lazy(() => import('@src/components/business/Rich/ReactQuill')),
+      exact: true
+   },
+   {
+      path: '/admin/vditormarkdown',
+      component: React.lazy(() => import('@src/components/business/Rich/VditorMarkdown')),
       exact: true
    },
    {

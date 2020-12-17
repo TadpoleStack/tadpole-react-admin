@@ -5,7 +5,7 @@ import 'braft-editor/dist/index.css';// 引入编辑器样式
 import 'braft-editor/dist/output.css';//美化输出后的样式
 import {ResponsiveContext} from '@src/context'
 
-class RichText extends React.Component{
+class Braft extends React.Component{
     static contextType = ResponsiveContext;
     constructor(props){
         super(props)
@@ -65,4 +65,4 @@ class RichText extends React.Component{
     }
 }
 
-export default RichText;
+export default Braft;
