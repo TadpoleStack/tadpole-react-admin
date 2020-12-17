@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 import './App.scss';
 import 'animate.css'
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/lib/locale/zh_CN';
 import LazyLoading from '@src/components/basics/LazyLoading'
 import ErrorBoundary from '@src/components/basics/ErrorBoundary'
 import { mainRoutes } from '@src/routes'
@@ -39,25 +41,27 @@ class App extends React.Component {
    }
    render() {
       return (
-         <ResponsiveContext.Provider value={this.state.ResponsiveValue}>
-            <Router>
-               <ErrorBoundary>
-                  <React.Suspense fallback={<LazyLoading style={{ zIndex: 10000, position: 'fixed' }} />}>
-                     <Switch>
-                        <Route path="/admin" render={routeProps => React.$getToken()
-                           ?<Admin {...routeProps}></Admin>
-                           :<Redirect to="/login" />
-                        }></Route>
-                        {
-                           mainRoutes.map((route, index) => {
-                              return <Route {...route} key={index}></Route>
-                           })
-                        }
-                     </Switch>
-                  </React.Suspense>
-               </ErrorBoundary>
-            </Router>
-         </ResponsiveContext.Provider>
+         <ConfigProvider locale={zhCN}>
+            <ResponsiveContext.Provider value={this.state.ResponsiveValue}>
+               <Router>
+                  <ErrorBoundary>
+                     <React.Suspense fallback={<LazyLoading style={{ zIndex: 10000, position: 'fixed' }} />}>
+                        <Switch>
+                           <Route path="/admin" render={routeProps => React.$getToken()
+                              ?<Admin {...routeProps}></Admin>
+                              :<Redirect to="/login" />
+                           }></Route>
+                           {
+                              mainRoutes.map((route, index) => {
+                                 return <Route {...route} key={index}></Route>
+                              })
+                           }
+                        </Switch>
+                     </React.Suspense>
+                  </ErrorBoundary>
+               </Router>
+            </ResponsiveContext.Provider>
+         </ConfigProvider>
       )
    }
 }
