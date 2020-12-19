@@ -9,6 +9,35 @@ const Header = React.lazy(() => import('@src/components/basics/Header'))
 const Sidebar = React.lazy(() => import('@src/components/basics/Sidebar'))
 // const AuthRoute = React.lazy(() => import('@src/components/basics/AuthRoute'))
 
+const RouterView = (props) => {
+   const routes = props.routes
+   const currRootPath = props.rootPath?props.rootPath:''
+   return (
+      routes.map((route, index) =>{
+         const nextRootPath = currRootPath+route.path
+         return (
+            route.children
+            ?<RouterView key={index} routes={route.children} rootPath={nextRootPath} />
+            :<Route 
+               key={currRootPath+route.path}
+               path={currRootPath+route.path}
+               exact={route.exact}
+               component={route.component}
+            />
+            // <>
+            // <Route 
+            //    key={currRootPath+route.path+' '+index}
+            //    path={currRootPath+route.path}
+            //    exact={route.exact}
+            //    component={route.component}
+            // />
+            // {route.children?<RouterView routes={route.children} rootPath={nextRootPath} />:null}
+            // </>
+         )
+      }
+      )
+   )
+}
 class Admin extends Component {
    constructor(props) {
       super(props)
@@ -46,12 +75,9 @@ class Admin extends Component {
                               <CSSTransition style={{height:'100%'}} key={location.pathname} classNames="fade" timeout={300}>
                                  <Switch location={location}>
                                  {
-                                    adminRoutes.map((route, index) => {
-                                       // return <AuthRoute route={route} key={route.path + index}></AuthRoute>
-                                       return React.$getToken()
-                                       ? <Route {...route} key={route.path+''+index}></Route>
+                                    React.$getToken()
+                                       ? <RouterView routes={adminRoutes}></RouterView>
                                        : <Redirect to="/login" />
-                                    })
                                  }
                                  </Switch>
                               </CSSTransition>

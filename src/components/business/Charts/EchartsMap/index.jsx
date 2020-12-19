@@ -1,4 +1,6 @@
 import React from 'react'
+import * as Echarts from 'echarts'
+import 'echarts-gl'
 // import * as mapUtils from 'element-china-area-data'
 import './index.scss'
 class EchartsMap extends React.Component{
@@ -13,7 +15,7 @@ class EchartsMap extends React.Component{
     echartsBox = React.createRef()
     getMapData = async (nextMapData={})=> {
         let res = await React.$api.map.getMapData(nextMapData.level,nextMapData.adcode)
-        React.$Echarts.registerMap(nextMapData.name?nextMapData.name:'china',res.data)
+        Echarts.registerMap(nextMapData.name?nextMapData.name:'china',res.data)
         this.setState({currMap:res.data})
         this.setOptions(res.data,nextMapData.name)
     }
@@ -68,8 +70,7 @@ class EchartsMap extends React.Component{
             animationEasing:'cubicOut',
             animationDurationUpdate:1000
           }
-        
-        this.echartsBox.current.setAttribute('class',`echarts-map ${changeAnimateSign==='in'?'transformCSS':''} hide-${changeAnimateSign}`)
+        if(this.echartsBox.current)this.echartsBox.current.setAttribute('class',`echarts-map ${changeAnimateSign==='in'?'transformCSS':''} hide-${changeAnimateSign}`)
         setTimeout(() => {
             Instance.setOption(option,true)
             if(!once){//只监听一次
@@ -82,8 +83,8 @@ class EchartsMap extends React.Component{
                 window.addEventListener('resize',()=>{Instance.resize()})
                 this.setState({once:true})
             }
-            this.echartsBox.current.setAttribute('class',`echarts-map normal-${changeAnimateSign}`)
-            setTimeout(() => {this.echartsBox.current.setAttribute('class',`echarts-map show-${changeAnimateSign}`)}, 100);
+            if(this.echartsBox.current)this.echartsBox.current.setAttribute('class',`echarts-map normal-${changeAnimateSign}`)
+            setTimeout(() => {if(this.echartsBox.current)this.echartsBox.current.setAttribute('class',`echarts-map show-${changeAnimateSign}`)}, 100);
         }, 400);
     }
     /**
@@ -120,7 +121,7 @@ class EchartsMap extends React.Component{
     }
 
     componentDidMount(){
-        const Instance = React.$Echarts.init(this.echartsBox.current,'light')
+        const Instance = Echarts.init(this.echartsBox.current,'light')
         this.setState({Instance:Instance})
         this.getMapData()
     }

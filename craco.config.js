@@ -16,7 +16,12 @@ module.exports = {
          }
       },
       {
-         plugin: CracoAntDesignPlugin
+         plugin: CracoAntDesignPlugin,
+         // options: {
+         //    customizeTheme: {
+         //       '@primary-color':'red'
+         //    }
+         // }
       },
       {
          plugin: sassResourcesLoader,

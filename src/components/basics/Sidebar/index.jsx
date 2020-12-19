@@ -4,6 +4,8 @@ import { SidebarWrap } from './style'
 import { Menu } from 'antd'
 import IconFont from '@src/components/basics/IconFont'
 import { ResponsiveContext } from '@src/context'
+import { adminRoutes } from '@src/routes'
+const {SubMenu, Item} = Menu
 
 class Sidebar extends Component {
    static contextType = ResponsiveContext;
@@ -148,23 +150,23 @@ class Sidebar extends Component {
     * 侧边栏折叠
     * @param {*} openKeys 
     */
-   handleOpenChange = openKeys => {
-      if (openKeys[openKeys.length - 1]) {
-         this.setState({ openKeys: [openKeys[openKeys.length - 1]] })
-      } else {
-         this.setState({ openKeys: [] })
-      }
-   }
+   // handleOpenChange = openKeys => {
+   //    if (openKeys[openKeys.length - 1]) {
+   //       this.setState({ openKeys: [openKeys[openKeys.length - 1]] })
+   //    } else {
+   //       this.setState({ openKeys: [] })
+   //    }
+   // }
    /**
     * 初始化设置sidebar的高亮状态及展开项
     */
-   initSidebarState() {
-      if (this.props.location.pathname) {
-         this.setState({ current: this.props.location.pathname })
-         let item = this.state.sidebarList.find(v => v.children && v.children.find(v2 => v2.key === this.props.location.pathname))
-         item && this.setState({ openKeys: [item.key] })
-      }
-   }
+   // initSidebarState() {
+   //    if (this.props.location.pathname) {
+   //       this.setState({ current: this.props.location.pathname })
+   //       let item = this.state.sidebarList.find(v => v.children && v.children.find(v2 => v2.key === this.props.location.pathname))
+   //       item && this.setState({ openKeys: [item.key] })
+   //    }
+   // }
    /**
     * 监听事件分发处理sidebar状态
     */
@@ -177,12 +179,54 @@ class Sidebar extends Component {
    }
    componentDidMount() {
       this.EventEmitterListener()
-      this.initSidebarState()
+      // this.initSidebarState()
    }
+   renderMenu = (props) => {
+      const routes = props.routes
+      const currRootPath = props.rootPath?props.rootPath:''
+      return(
+         routes.map(route => {
+            const nextRootPath = currRootPath+route.path
+            return route.children
+            ? <SubMenu
+                     key={currRootPath+route.path}
+                     icon={route.meta.icon ? <IconFont type={route.meta.icon} /> : null}
+                     title={route.meta.title}>
+                     { this.renderMenu({routes:route.children,rootPath:nextRootPath}) }
+               </SubMenu>
+            : <Item key={currRootPath+route.path} icon={route.meta.icon ? <IconFont type={route.meta.icon} /> : null}> {route.meta.title}</Item>
+         })
+      )
+    }
+   componentWillMount() {
+      const menuTreeNode = this.renderMenu({routes:adminRoutes[0].children, rootPath:adminRoutes[0].path});
+      this.setState({
+        menuTreeNode
+      })
+    }
+
    componentWillUnmount() {
       React.$eventEmitter.removeAllListeners('changeSidebarState')
    }
    render() {
+      const RecursionMenu = (props) => {
+         const routes = props.routes
+         const currRootPath = props.rootPath?props.rootPath:''
+         return(
+            routes.map(route => {
+               const nextRootPath = currRootPath+route.path
+               return route.children
+               ? <SubMenu
+                        key={currRootPath+route.path}
+                        icon={route.meta.icon ? <IconFont type={route.meta.icon} /> : null}
+                        title={route.meta.title}>
+                        <RecursionMenu routes={route.children} rootPath={nextRootPath} ></RecursionMenu>
+                  </SubMenu>
+               : <Item key={currRootPath+route.path} icon={route.meta.icon ? <IconFont type={route.meta.icon} /> : null}> {route.meta.title}</Item>
+            })
+         )
+      }
+
       return (
          <SidebarWrap
             width={(this.context==='PC'&&this.state.sidebarState)?'80px':this.state.width}
@@ -194,28 +238,13 @@ class Sidebar extends Component {
                onClick={this.handleClick}
                onOpenChange={this.handleOpenChange}
                style={{ minHeight: '100%' }}
-               openKeys={this.state.openKeys}
+               // openKeys={this.state.openKeys}
                selectedKeys={[this.state.current]}
                mode="inline"
                inlineCollapsed={this.context==='PC'?this.state.sidebarState?true:false:false}
             >
-               {
-                  this.state.sidebarList.map(item => {
-                     return item.children && item.children.length > 0
-                        ? <Menu.SubMenu
-                           key={item.key}
-                           icon={item.icon ? <IconFont type={item.icon} /> : null}
-                           title={item.text}>
-                           {item.children.map(subItem =>
-                              <Menu.Item key={subItem.key} icon={subItem.icon ? <IconFont type={subItem.icon} /> : null}>
-                                 {subItem.text}
-                              </Menu.Item>)}
-                        </Menu.SubMenu>
-                        : <Menu.Item key={item.key} icon={item.icon ? <IconFont type={item.icon} /> : null}>
-                           {item.text}
-                        </Menu.Item>
-                  })
-               }
+               {/* <RecursionMenu routes={adminRoutes[0].children} rootPath={adminRoutes[0].path} ></RecursionMenu> */}
+               {this.state.menuTreeNode}
             </Menu>
          </SidebarWrap>
       )
