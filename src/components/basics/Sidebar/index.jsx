@@ -179,6 +179,10 @@ class Sidebar extends Component {
    }
    componentDidMount() {
       this.EventEmitterListener()
+      const RecursionMenu = this.renderMenu({routes:adminRoutes[0].children, rootPath:adminRoutes[0].path});
+      this.setState({
+         RecursionMenu
+      })
       // this.initSidebarState()
    }
    renderMenu = (props) => {
@@ -198,34 +202,11 @@ class Sidebar extends Component {
          })
       )
     }
-   componentWillMount() {
-      const menuTreeNode = this.renderMenu({routes:adminRoutes[0].children, rootPath:adminRoutes[0].path});
-      this.setState({
-        menuTreeNode
-      })
-    }
 
    componentWillUnmount() {
       React.$eventEmitter.removeAllListeners('changeSidebarState')
    }
    render() {
-      const RecursionMenu = (props) => {
-         const routes = props.routes
-         const currRootPath = props.rootPath?props.rootPath:''
-         return(
-            routes.map(route => {
-               const nextRootPath = currRootPath+route.path
-               return route.children
-               ? <SubMenu
-                        key={currRootPath+route.path}
-                        icon={route.meta.icon ? <IconFont type={route.meta.icon} /> : null}
-                        title={route.meta.title}>
-                        <RecursionMenu routes={route.children} rootPath={nextRootPath} ></RecursionMenu>
-                  </SubMenu>
-               : <Item key={currRootPath+route.path} icon={route.meta.icon ? <IconFont type={route.meta.icon} /> : null}> {route.meta.title}</Item>
-            })
-         )
-      }
 
       return (
          <SidebarWrap
@@ -243,8 +224,7 @@ class Sidebar extends Component {
                mode="inline"
                inlineCollapsed={this.context==='PC'?this.state.sidebarState?true:false:false}
             >
-               {/* <RecursionMenu routes={adminRoutes[0].children} rootPath={adminRoutes[0].path} ></RecursionMenu> */}
-               {this.state.menuTreeNode}
+               {this.state.RecursionMenu}
             </Menu>
          </SidebarWrap>
       )

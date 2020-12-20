@@ -24,20 +24,11 @@ const RouterView = (props) => {
                exact={route.exact}
                component={route.component}
             />
-            // <>
-            // <Route 
-            //    key={currRootPath+route.path+' '+index}
-            //    path={currRootPath+route.path}
-            //    exact={route.exact}
-            //    component={route.component}
-            // />
-            // {route.children?<RouterView routes={route.children} rootPath={nextRootPath} />:null}
-            // </>
          )
-      }
-      )
+      })
    )
 }
+
 class Admin extends Component {
    constructor(props) {
       super(props)

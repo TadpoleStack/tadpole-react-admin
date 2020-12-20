@@ -31,7 +31,7 @@ export const adminRoutes = [
       meta:{title:'后台'},
       children: [
          {
-            path:'/start',
+            path:'/',
             component: React.lazy(() => import('@src/components/business/Start')),
             exact: true,
             meta:{title:'开始'}
@@ -131,7 +131,7 @@ export const adminRoutes = [
             component: React.lazy(() => import('@src/components/basics/NotFound')),
             exact: true,
             meta:{title:'404'}
-         },
+         }
       ]
    }
    // {
